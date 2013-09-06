@@ -1322,15 +1322,37 @@ class BackendPagesModel
 	/**
 	 * Get the possible block types
 	 *
+	 * @param bool $incluceBlockExtras Should the modules with just block extras be included in the dropdown (eg. false if a module is already linked to a page).
 	 * @return array
 	 */
-	public static function getTypes()
+	public static function getTypesForDropdown($incluceBlockExtras = true)
 	{
-		return array(
-			'rich_text' => BL::lbl('Editor'),
-			'block' => BL::lbl('Module'),
-			'widget' => BL::lbl('Widget')
+		// init labels (for readability below)
+		$labelAddNow = SpoonFilter::ucfirst(BL::lbl('ExtraAddNow'));
+		$labelModuleContent = SpoonFilter::ucfirst(BL::lbl('ExtraModuleContent'));
+
+		// init types with user generated types
+		$types = array(
+			$labelAddNow => array(
+				'add_now_html' => BL::lbl('Text')
+			),
+			$labelModuleContent => array()
 		);
+
+		// get the extra's grouped by module
+		$extrasData = BackendExtensionsModel::getExtrasData();
+
+		// loop the modules to add to the types array
+		foreach($extrasData as $module => $data)
+		{
+			// ignore modules that only have block extras if needed
+			if(!$incluceBlockExtras && !isset($data['items']['widget'])) continue;
+
+			$types[$labelModuleContent][$module] = $data['name'];
+		}
+
+		// return the types grouped by ug items and module items
+		return $types;
 	}
 
 	/**

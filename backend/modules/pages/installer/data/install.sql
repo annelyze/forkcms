@@ -29,8 +29,12 @@ CREATE TABLE IF NOT EXISTS `pages` (
 CREATE TABLE IF NOT EXISTS `pages_blocks` (
  `revision_id` int(11) NOT NULL COMMENT 'The ID of the page that contains this block.',
  `position` varchar(255) NOT NULL,
+ `type` enum('html', 'photo', 'video', 'extra') NOT NULL default 'html',
  `extra_id` int(11) default NULL COMMENT 'The linked extra.',
  `html` text COMMENT 'if this block is HTML this field should contain the real HTML.',
+ `photo_file` varchar(255) COMMENT 'if this block is a photo this field should contain the name of the photo file.',
+ `photo_position` enum('left', 'center', 'right') NOT NULL default 'left' COMMENT 'if this block is a photo this field should contain the position of the photo.',
+ `video_url` varchar(255) COMMENT 'if this block is a video this field should contain the URL to the video.',
  `created_on` datetime NOT NULL,
  `edited_on` datetime NOT NULL,
  `visible` enum('N','Y') NOT NULL,

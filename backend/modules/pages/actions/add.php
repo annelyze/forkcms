@@ -240,7 +240,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		$this->frm->addCheckbox('is_action', false);
 
 		// extra
-		$this->frm->addDropdown('extra_type', BackendPagesModel::getTypes());
+		$this->frm->addDropdown('extra_type', BackendPagesModel::getTypesForDropdown());
 
 		// meta
 		$this->meta = new BackendMeta($this->frm, null, 'title', true);
