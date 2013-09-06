@@ -71,33 +71,31 @@
         <translation language="lt"><![CDATA[išorinė nuoroda]]></translation>
         <translation language="el"><![CDATA[Εξωτερικός σύνδεσμος]]></translation>
       </item>
-      <item type="label" name="ExtraTypeBlock">
-        <translation language="nl"><![CDATA[module]]></translation>
-        <translation language="en"><![CDATA[module]]></translation>
-        <translation language="it"><![CDATA[modulo]]></translation>
-        <translation language="ru"><![CDATA[Модуль]]></translation>
-        <translation language="zh"><![CDATA[模块]]></translation>
-        <translation language="de"><![CDATA[Modul]]></translation>
-        <translation language="fr"><![CDATA[module]]></translation>
-        <translation language="hu"><![CDATA[modul]]></translation>
-        <translation language="es"><![CDATA[módulo]]></translation>
-        <translation language="uk"><![CDATA[Модуль]]></translation>
-        <translation language="lt"><![CDATA[modulis]]></translation>
-        <translation language="el"><![CDATA[Ενότητα]]></translation>
+      <item type="label" name="ExtraAddNow">
+        <translation language="en"><![CDATA[add now]]></translation>
+        <translation language="nl"><![CDATA[nu toevoegen]]></translation>
+        <translation language="it"><![CDATA[aggiungere ora]]></translation>
+        <translation language="ru"><![CDATA[Внести сейчас]]></translation>
+        <translation language="zh"><![CDATA[現在添加]]></translation>
+        <translation language="de"><![CDATA[fügen jetzt]]></translation>
+        <translation language="fr"><![CDATA[ajouter maintenant]]></translation>
+        <translation language="hu"><![CDATA[add már]]></translation>
+        <translation language="es"><![CDATA[agregue ahora]]></translation>
+        <translation language="uk"><![CDATA[внести зараз]]></translation>
+        <translation language="lt"><![CDATA[pridėti dabar]]></translation>
       </item>
-      <item type="label" name="ExtraTypeWidget">
-        <translation language="nl"><![CDATA[widget]]></translation>
-        <translation language="en"><![CDATA[widget]]></translation>
-        <translation language="it"><![CDATA[widget]]></translation>
-        <translation language="ru"><![CDATA[Виджет]]></translation>
-        <translation language="zh"><![CDATA[小工具]]></translation>
-        <translation language="de"><![CDATA[Widget]]></translation>
-        <translation language="fr"><![CDATA[widget]]></translation>
-        <translation language="hu"><![CDATA[widget]]></translation>
-        <translation language="es"><![CDATA[widget]]></translation>
-        <translation language="uk"><![CDATA[Віджет]]></translation>
-        <translation language="lt"><![CDATA[programėlė]]></translation>
-        <translation language="el"><![CDATA[μικροεφαρμογή]]></translation>
+      <item type="label" name="ExtraModuleContent">
+        <translation language="nl"><![CDATA[uit modules]]></translation>
+        <translation language="en"><![CDATA[from modules]]></translation>
+        <translation language="it"><![CDATA[da moduli]]></translation>
+        <translation language="ru"><![CDATA[из модулей]]></translation>
+        <translation language="zh"><![CDATA[從模塊]]></translation>
+        <translation language="de"><![CDATA[aus den Modulen]]></translation>
+        <translation language="fr"><![CDATA[à partir de modules]]></translation>
+        <translation language="hu"><![CDATA[modulokból]]></translation>
+        <translation language="es"><![CDATA[a partir de módulos]]></translation>
+        <translation language="uk"><![CDATA[з модулів]]></translation>
+        <translation language="lt"><![CDATA[iš modulių]]></translation>
       </item>
       <item type="label" name="Fallback">
         <translation language="nl"><![CDATA[Niet-toegewezen blokken]]></translation>
@@ -175,6 +173,19 @@
         <translation language="zh"><![CDATA[导航]]></translation>
         <translation language="de"><![CDATA[Navigation]]></translation>
       </item>
+      <item type="label" name="Photo">
+        <translation language="nl"><![CDATA[foto]]></translation>
+        <translation language="en"><![CDATA[photo]]></translation>
+        <translation language="it"><![CDATA[foto]]></translation>
+        <translation language="ru"><![CDATA[фото]]></translation>
+        <translation language="zh"><![CDATA[照片]]></translation>
+        <translation language="de"><![CDATA[Foto]]></translation>
+        <translation language="fr"><![CDATA[photo]]></translation>
+        <translation language="hu"><![CDATA[fénykép]]></translation>
+        <translation language="es"><![CDATA[foto]]></translation>
+        <translation language="uk"><![CDATA[фото]]></translation>
+        <translation language="lt"><![CDATA[nuotrauka]]></translation>
+      </item>
       <item type="label" name="Redirect">
         <translation language="nl"><![CDATA[redirect]]></translation>
         <translation language="en"><![CDATA[redirect]]></translation>
@@ -240,6 +251,19 @@
         <translation language="es"><![CDATA[formulario de baja]]></translation>
         <translation language="uk"><![CDATA[Форма відписки]]></translation>
         <translation language="el"><![CDATA[Φόρμα αποποίησης εγγραφής]]></translation>
+      </item>
+      <item type="label" name="Video">
+        <translation language="nl"><![CDATA[video]]></translation>
+        <translation language="en"><![CDATA[video]]></translation>
+        <translation language="it"><![CDATA[Video]]></translation>
+        <translation language="ru"><![CDATA[видео]]></translation>
+        <translation language="zh"><![CDATA[视频]]></translation>
+        <translation language="de"><![CDATA[Video]]></translation>
+        <translation language="fr"><![CDATA[vidéo]]></translation>
+        <translation language="hu"><![CDATA[videó]]></translation>
+        <translation language="es"><![CDATA[vídeo]]></translation>
+        <translation language="uk"><![CDATA[відео]]></translation>
+        <translation language="lt"><![CDATA[video]]></translation>
       </item>
       <item type="message" name="Added">
         <translation language="nl"><![CDATA[De pagina "%1$s" werd toegevoegd.]]></translation>
@@ -536,6 +560,32 @@
         <translation language="hu"><![CDATA[<strong>Figyelmeztetés:</strong> A megváltozott sablon másik helyre mutat vagy nem létezik.]]></translation>
         <translation language="es"><![CDATA[<strong>Atención:</strong> Cambiar la plantilla puede hacer que el contenido existente esté en otro lugar o que ya no se muestre.]]></translation>
         <translation language="el"><![CDATA[<strong>Προσοχή:</strong> Αν αλλάξετε το πρότυπο μπορεί το υπάρχον περιεχόμενο να εμφανισθεί σε άλλη περιοχή ή και να μη φαίνεται καθόλου.]]></translation>
+      </item>
+      <item type="message" name="WhichExtra">
+        <translation language="nl"><![CDATA[Wat moet er getoond worden?]]></translation>
+        <translation language="en"><![CDATA[What should it display?]]></translation>
+        <translation language="hu"><![CDATA[Mit is megjeleníteni?]]></translation>
+        <translation language="it"><![CDATA[Che cosa dovrebbe mostrare?]]></translation>
+        <translation language="ru"><![CDATA[Что она должна отображать?]]></translation>
+        <translation language="zh"><![CDATA[它應該是什麼顯示？]]></translation>
+        <translation language="fr"><![CDATA[Que devrait-il afficher?]]></translation>
+        <translation language="de"><![CDATA[Was sollte sie anzuzeigen?]]></translation>
+        <translation language="es"><![CDATA[¿Qué debe mostrar?]]></translation>
+        <translation language="lt"><![CDATA[Ką ji turėtų rodyti?]]></translation>
+        <translation language="uk"><![CDATA[Що вона повинна відображати?]]></translation>
+      </item>
+      <item type="message" name="WhichType">
+        <translation language="nl"><![CDATA[Wat wil je toevoegen?]]></translation>
+        <translation language="en"><![CDATA[What do you want to add?]]></translation>
+        <translation language="hu"><![CDATA[Mit akarsz hozzáadni?]]></translation>
+        <translation language="it"><![CDATA[Cosa vuoi aggiungere?]]></translation>
+        <translation language="ru"><![CDATA[Что вы хотите добавить?]]></translation>
+        <translation language="zh"><![CDATA[你想添加什麼？]]></translation>
+        <translation language="fr"><![CDATA[Que voulez-vous ajouter?]]></translation>
+        <translation language="de"><![CDATA[Was wissen Sie hinzufügen möchten?]]></translation>
+        <translation language="es"><![CDATA[¿Qué quieres añadir?]]></translation>
+        <translation language="lt"><![CDATA[Ką norite pridėti?]]></translation>
+        <translation language="uk"><![CDATA[Що ви хочете додати?]]></translation>
       </item>
       <item type="message" name="WidgetAttached">
         <translation language="nl"><![CDATA[De widget <strong>%1$s</strong> is gekoppeld aan deze sectie.]]></translation>

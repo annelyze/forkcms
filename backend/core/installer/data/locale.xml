@@ -4282,7 +4282,7 @@
       <item type="label" name="Block">
         <translation language="nl"><![CDATA[blok]]></translation>
         <translation language="en"><![CDATA[block]]></translation>
-        <translation language="hu"><![CDATA[tilt]]></translation>
+        <translation language="hu"><![CDATA[blokkok]]></translation>
         <translation language="it"><![CDATA[blocco]]></translation>
         <translation language="ru"><![CDATA[Блок]]></translation>
         <translation language="zh"><![CDATA[屏蔽]]></translation>
@@ -4295,6 +4295,22 @@
         <translation language="el"><![CDATA[μπλοκ]]></translation>
         <translation language="tr"><![CDATA[blok]]></translation>
         <translation language="pl"><![CDATA[blok]]></translation>
+      </item>
+      <item type="label" name="Blocks">
+        <translation language="nl"><![CDATA[blokken]]></translation>
+        <translation language="en"><![CDATA[blocks]]></translation>
+        <translation language="hu"><![CDATA[blokkok]]></translation>
+        <translation language="it"><![CDATA[blocchi]]></translation>
+        <translation language="ru"><![CDATA[блоки]]></translation>
+        <translation language="zh"><![CDATA[塊]]></translation>
+        <translation language="de"><![CDATA[Blöcke]]></translation>
+        <translation language="fr"><![CDATA[blocs]]></translation>
+        <translation language="es"><![CDATA[bloques]]></translation>
+        <translation language="lt"><![CDATA[blokai]]></translation>
+        <translation language="uk"><![CDATA[блоки]]></translation>
+        <translation language="sv"><![CDATA[block]]></translation>
+        <translation language="tr"><![CDATA[blokları]]></translation>
+        <translation language="pl"><![CDATA[bloki]]></translation>
       </item>
       <item type="label" name="Blog">
         <translation language="nl"><![CDATA[blog]]></translation>
@@ -9220,40 +9236,6 @@
         <translation language="el"><![CDATA[βάρος]]></translation>
         <translation language="pl"><![CDATA[szerokość]]></translation>
         <translation language="tr"><![CDATA[ağırlık]]></translation>
-      </item>
-      <item type="label" name="WhichModule">
-        <translation language="nl"><![CDATA[welke module]]></translation>
-        <translation language="en"><![CDATA[which module]]></translation>
-        <translation language="hu"><![CDATA[which module]]></translation>
-        <translation language="it"><![CDATA[quale modulo]]></translation>
-        <translation language="ru"><![CDATA[какой модуль]]></translation>
-        <translation language="zh"><![CDATA[哪个模块]]></translation>
-        <translation language="fr"><![CDATA[quel module]]></translation>
-        <translation language="de"><![CDATA[welches Modul]]></translation>
-        <translation language="es"><![CDATA[Cuál módulo]]></translation>
-        <translation language="lt"><![CDATA[koks modulis]]></translation>
-        <translation language="uk"><![CDATA[Який модуль]]></translation>
-        <translation language="sv"><![CDATA[vilken modul]]></translation>
-        <translation language="el"><![CDATA[ποιά ενότητα]]></translation>
-        <translation language="pl"><![CDATA[który moduł]]></translation>
-        <translation language="tr"><![CDATA[hangi modül]]></translation>
-      </item>
-      <item type="label" name="WhichWidget">
-        <translation language="nl"><![CDATA[welke widget]]></translation>
-        <translation language="en"><![CDATA[which widget]]></translation>
-        <translation language="hu"><![CDATA[which widget]]></translation>
-        <translation language="it"><![CDATA[quale widget]]></translation>
-        <translation language="ru"><![CDATA[какой виджет]]></translation>
-        <translation language="zh"><![CDATA[哪个小工具]]></translation>
-        <translation language="fr"><![CDATA[quel widget]]></translation>
-        <translation language="de"><![CDATA[welches Widget]]></translation>
-        <translation language="es"><![CDATA[Cuál widget]]></translation>
-        <translation language="lt"><![CDATA[koks plėtinys]]></translation>
-        <translation language="uk"><![CDATA[Який віджет]]></translation>
-        <translation language="sv"><![CDATA[vilken manick]]></translation>
-        <translation language="el"><![CDATA[ποιά μικροεφαρμογή]]></translation>
-        <translation language="pl"><![CDATA[który widget]]></translation>
-        <translation language="tr"><![CDATA[hangi widget]]></translation>
       </item>
       <item type="label" name="Widget">
         <translation language="nl"><![CDATA[widget]]></translation>

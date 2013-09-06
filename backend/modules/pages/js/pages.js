@@ -46,8 +46,7 @@ jsBackend.pages.extras =
 	init: function()
 	{
 		// bind events
-		$('#extraType').on('change', jsBackend.pages.extras.populateExtraModules);
-		$('#extraModule').on('change', jsBackend.pages.extras.populateExtraIds);
+		$('#extraType').on('change', jsBackend.pages.extras.populateExtraIds);
 
 		// bind buttons
 		$(document).on('click', 'a.addBlock', jsBackend.pages.extras.showAddDialog);
@@ -258,64 +257,95 @@ jsBackend.pages.extras =
 		if($('#templateVisualFallback .templatePositionCurrentType').length == 0) $('#templateVisualFallback').hide();
 	},
 
-	// populate the dropdown with the modules
-	populateExtraModules: function()
-	{
-		// get selected value
-		var selectedType = $('#extraType').val();
-
-		// hide
-		$('#extraModuleHolder').hide();
-		$('#extraExtraIdHolder').hide();
-		$('#extraModule').html('<option value="0">-</option>');
-		$('#extraExtraId').html('<option value="0">-</option>');
-
-		// only widgets and block need the module dropdown
-		if(selectedType == 'widget' || selectedType == 'block')
-		{
-			// loop modules
-			for(var i in extrasData)
-			{
-				// add option if needed
-				if(typeof extrasData[i]['items'][selectedType] != 'undefined') $('#extraModule').append('<option value="'+ extrasData[i].value +'">'+ extrasData[i].name +'</option>');
-			}
-
-			// show
-			$('#extraModuleHolder').show();
-		}
-	},
-
 	// populates the dropdown with the extra's
 	populateExtraIds: function()
 	{
 		// get selected value
 		var selectedType = $('#extraType').val();
-		var selectedModule = $('#extraModule').val();
 
-		// hide and clear previous items
+		// hide
 		$('#extraExtraIdHolder').hide();
-		$('#extraExtraId').html('');
+		$('#extraExtraId').html('<option id="defaultExtraIdOption" value="0">-</option>');
 
-		// any items?
-		if(typeof extrasData[selectedModule] != 'undefined' && typeof extrasData[selectedModule]['items'][selectedType] != 'undefined')
+		// only show the extra id dropdown if the selected type is a valid module
+		if(typeof extrasData[selectedType]['items'] != 'undefined')
 		{
-			if(extrasData[selectedModule]['items'][selectedType].length == 1 && selectedType == 'block')
+			// init var
+			var hasModules = false;
+
+			// check if there already blocks linked
+			$('input[id^=blockExtraId]').each(function()
 			{
-				$('#extraExtraId').append('<option selected="selected" value="'+ extrasData[selectedModule]['items'][selectedType][0].id +'">'+ extrasData[selectedModule]['items'][selectedType][0].label +'</option>');
+				// get id
+				var id = $(this).val();
+
+				// check if a block is already linked
+				if(id != '' && typeof extrasById[id] != 'undefined' && extrasById[id].type == 'block') hasModules = true;
+			});
+
+			// hide warnings
+			$('#extraWarningAlreadyBlock').hide();
+			$('#extraWarningHomeNoBlock').hide();
+
+			// init var
+			var enabled = true;
+
+			// blocks linked?
+			if(hasModules)
+			{
+				// disable module selection
+				enabled = false;
+
+				// show warning
+				$('#extraWarningAlreadyBlock').show();
 			}
 
-			else
+			// home can't have any modules linked!
+			if(typeof pageID != 'undefined' && pageID == 1)
 			{
-				// loop items
-				for(var i in extrasData[selectedModule]['items'][selectedType])
+				// disable module selection
+				enabled = false;
+
+				// show warning
+				$('#extraWarningHomeNoBlock').show();
+			}
+
+			// get items of the selected module
+			var extrasItems = extrasData[selectedType]['items'];
+
+			// block extras are allowed and this module has block extras
+			if(enabled && typeof extrasItems['block'] != 'undefined' && extrasItems['block'].length > 0)
+			{
+				// add optgroup for blocks
+				$('#extraExtraId').append('<optgroup label="' + utils.string.ucfirst(jsBackend.locale.lbl('Blocks')) + '" id="extraBlocks"></optgroup>');
+
+				// loop blocks
+				for(var i in extrasItems['block'])
 				{
-					// add option
-					$('#extraExtraId').append('<option value="'+ extrasData[selectedModule]['items'][selectedType][i].id +'">'+ extrasData[selectedModule]['items'][selectedType][i].label +'</option>');
+					// add option if needed
+					$('#extraBlocks').append('<option value="'+ extrasItems['block'][i].id +'">'+ extrasItems['block'][i].label +'</option>');
 				}
-
-				// show
-				$('#extraExtraIdHolder').show();
 			}
+
+			// this module has widget extras
+			if(typeof extrasItems['widget'] != 'undefined' && extrasItems['widget'].length > 0)
+			{
+				// add optgroup for widgets
+				$('#extraExtraId').append('<optgroup label="' + utils.string.ucfirst(jsBackend.locale.lbl('Widgets')) + '" id="extraWidgets"></optgroup>');
+
+				// loop widgets
+				for(var i in extrasItems['widget'])
+				{
+					// add option if needed
+					$('#extraWidgets').append('<option value="'+ extrasItems['widget'][i].id +'">'+ extrasItems['widget'][i].label +'</option>');
+				}
+			}
+
+			// remove the default option is needed
+			if($('#extraBlocks').length > 0 || $('#extraWidgets').length > 0) $('#defaultExtraIdOption').remove();
+
+			// show
+			$('#extraExtraIdHolder').show();
 		}
 	},
 
@@ -382,55 +412,10 @@ jsBackend.pages.extras =
 		// save the position wherefor we will change the extra
 		position = $(this).parent().parent().attr('data-position');
 
-		// init var
-		var hasModules = false;
-
-		// check if there already blocks linked
-		$('input[id^=blockExtraId]').each(function()
-		{
-			// get id
-			var id = $(this).val();
-
-			// check if a block is already linked
-			if(id != '' && typeof extrasById[id] != 'undefined' && extrasById[id].type == 'block') hasModules = true;
-		});
-
-		// hide warnings
-		$('#extraWarningAlreadyBlock').hide();
-		$('#extraWarningHomeNoBlock').hide();
-
-		// init var
-		var enabled = true;
-
-		// blocks linked?
-		if(hasModules)
-		{
-			// disable module selection
-			enabled = false;
-
-			// show warning
-			$('#extraWarningAlreadyBlock').show();
-		}
-
-		// home can't have any modules linked!
-		if(typeof pageID != 'undefined' && pageID == 1)
-		{
-			// disable module selection
-			enabled = false;
-
-			// show warning
-			$('#extraWarningHomeNoBlock').show();
-		}
-
-		// enable/disable blocks
-		$('#extraType option[value=block]').attr('disabled', !enabled);
-
 		// set type
 		$('#extraType').val('html');
-		$('#extraExtraId').val(0);
-
-		// populate the modules
-		jsBackend.pages.extras.populateExtraModules();
+		$('#extraExtraId').html('<option id="defaultExtraIdOption" value="0">-</option>').val(0);
+		$('#extraExtraIdHolder').hide();
 
 		// initialize the modal for choosing an extra
 		if($('#addBlock').length > 0)

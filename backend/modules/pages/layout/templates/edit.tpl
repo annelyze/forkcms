@@ -331,35 +331,30 @@
 	</div>
 
 	{*
-		Dialog to select the content (editor, module or widget).
+		Dialog to select the content (editor, photo, video, module or widget).
 		Do not change the ID!
 	 *}
 	<div id="addBlock" class="forkForms" title="{$lblChooseContent|ucfirst}" style="display: none;">
 		<input type="hidden" id="extraForBlock" name="extraForBlock" value="" />
 		<div class="options horizontal">
-			<p>{$msgHelpBlockContent}</p>
-			<p id="extraWarningAlreadyBlock">
-				<span class="infoMessage">{$msgModuleBlockAlreadyLinked}</span>
-			</p>
-			<p id="extraWarningHomeNoBlock">
-				<span class="infoMessage">{$msgHomeNoBlock}</span>
-			</p>
+			<p>{$msgWhichType}</p>
 			<p>
-				<label for="extraType">{$lblType|ucfirst}</label>
 				{$ddmExtraType}
 			</p>
-			<p id="extraModuleHolder" style="display: none;">
-				<label for="extraModule">{$lblWhichModule|ucfirst}</label>
-				<select id="extraModule">
-					<option value="-1">-</option>
-				</select>
-			</p>
-			<p id="extraExtraIdHolder" style="display: none;">
-				<label for="extraExtraId">{$lblWhichWidget|ucfirst}</label>
-				<select id="extraExtraId">
-					<option value="-1">-</option>
-				</select>
-			</p>
+			<div id="extraExtraIdHolder" style="display: none;">
+				<p>{$msgWhichExtra}</p>
+				<p id="extraWarningAlreadyBlock">
+					<span class="infoMessage">{$msgModuleBlockAlreadyLinked}</span>
+				</p>
+				<p id="extraWarningHomeNoBlock">
+					<span class="infoMessage">{$msgHomeNoBlock}</span>
+				</p>
+				<p>
+					<select id="extraExtraId">
+						<option value="-1">-</option>
+					</select>
+				</p>
+			</div>
 		</div>
 	</div>
 
