@@ -132,7 +132,7 @@ class BackendContentBlocksModel
 		$db->delete('modules_extras', 'id = ? AND module = ? AND type = ? AND action = ?', array($extra['id'], $extra['module'], $extra['type'], $extra['action']));
 
 		// update blocks with this item linked
-		$db->update('pages_blocks', array('extra_id' => null, 'html' => ''), 'extra_id = ?', array($item['extra_id']));
+		$db->update('pages_blocks', array('extra_id' => null, 'html' => '', 'type' => 'html'), 'extra_id = ?', array($item['extra_id']));
 
 		// delete all records
 		$db->delete('content_blocks', 'id = ? AND language = ?', array($id, BL::getWorkingLanguage()));

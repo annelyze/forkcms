@@ -230,7 +230,7 @@ class BackendModel extends BaseModel
 		// unset blocks
 		else
 		{
-			BackendModel::getContainer()->get('database')->update('pages_blocks', array('extra_id' => null), 'extra_id = ?', $id);
+			BackendModel::getContainer()->get('database')->update('pages_blocks', array('extra_id' => null, 'html' => '', 'type' => 'html'), 'extra_id = ?', $id);
 		}
 
 		// delete extra
