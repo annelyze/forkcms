@@ -160,19 +160,6 @@
         <translation language="es"><![CDATA[meta navegación]]></translation>
         <translation language="uk"><![CDATA[Мета]]></translation>
       </item>
-      <item type="label" name="Photo">
-        <translation language="nl"><![CDATA[foto]]></translation>
-        <translation language="en"><![CDATA[photo]]></translation>
-        <translation language="it"><![CDATA[foto]]></translation>
-        <translation language="ru"><![CDATA[фото]]></translation>
-        <translation language="zh"><![CDATA[照片]]></translation>
-        <translation language="de"><![CDATA[Foto]]></translation>
-        <translation language="fr"><![CDATA[photo]]></translation>
-        <translation language="hu"><![CDATA[fénykép]]></translation>
-        <translation language="es"><![CDATA[foto]]></translation>
-        <translation language="uk"><![CDATA[фото]]></translation>
-        <translation language="lt"><![CDATA[nuotrauka]]></translation>
-      </item>
       <item type="label" name="Redirect">
         <translation language="nl"><![CDATA[redirect]]></translation>
         <translation language="en"><![CDATA[redirect]]></translation>
