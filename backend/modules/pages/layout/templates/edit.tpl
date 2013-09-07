@@ -331,7 +331,7 @@
 	</div>
 
 	{*
-		Dialog to select the content (editor, photo, video, module or widget).
+		Dialog to select the content (editor, image, video, module or widget).
 		Do not change the ID!
 	 *}
 	<div id="addBlock" class="forkForms" title="{$lblChooseContent|ucfirst}" style="display: none;">
