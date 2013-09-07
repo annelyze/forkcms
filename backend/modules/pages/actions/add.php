@@ -168,13 +168,15 @@ class BackendPagesAdd extends BackendBaseActionAdd
 				// reset some stuff
 				if($block['extra_id'] <= 0) $block['extra_id'] = null;
 
-				// init html
+				// init vars
+				$block['type'] = 'extra';
 				$block['html'] = null;
 
 				// extra-type is HTML
 				if($block['extra_id'] === null)
 				{
 					// reset vars
+					$block['type'] = 'html';
 					$block['extra_id'] = null;
 					$block['html'] = $_POST['block_html_' . $i];
 				}

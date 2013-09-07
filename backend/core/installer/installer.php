@@ -619,6 +619,7 @@ class ModuleInstaller
 
 			// build block
 			if(!isset($block['revision_id'])) $block['revision_id'] = $revision['revision_id'];
+			if(isset($block['extra_id'])) $block['type'] = 'extra';
 			if(!isset($block['html'])) $block['html'] = '';
 			elseif(file_exists($block['html'])) $block['html'] = file_get_contents($block['html']);
 			if(!isset($block['created_on'])) $block['created_on'] = gmdate('Y-m-d H:i:s');
