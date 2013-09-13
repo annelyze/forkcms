@@ -100,6 +100,9 @@
 								</fieldset>
 							</div>
 
+							{* this will store the selected type *}
+							{$positions.blocks.hidType}
+
 							{* this will store the selected extra *}
 							{$positions.blocks.hidExtraId}
 

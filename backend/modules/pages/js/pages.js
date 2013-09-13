@@ -62,7 +62,7 @@ jsBackend.pages.extras =
 	},
 
 	// store the extra for real
-	addBlock: function(selectedExtraId, selectedPosition)
+	addBlock: function(selectedType, selectedExtraId, selectedPosition)
 	{
 		// clone prototype block
 		var block = $('.contentBlock:first').clone();
@@ -72,18 +72,23 @@ jsBackend.pages.extras =
 
 		// update index occurences in the hidden data
 		var blockHtml = $('textarea[id^=blockHtml]', block);
+		var blockType = $('input[id^=blockType]', block);
 		var blockExtraId = $('input[id^=blockExtraId]', block);
 		var blockPosition = $('input[id^=blockPosition]', block);
 		var blockVisibility = $('input[id^=blockVisible]', block);
 
 		// update id & name to new index
 		blockHtml.prop('id', blockHtml.prop('id').replace('0', index)).prop('name', blockHtml.prop('name').replace('0', index));
+		blockType.prop('id', blockType.prop('id').replace('0', index)).prop('name', blockType.prop('name').replace('0', index));
 		blockExtraId.prop('id', blockExtraId.prop('id').replace('0', index)).prop('name', blockExtraId.prop('name').replace('0', index));
 		blockPosition.prop('id', blockPosition.prop('id').replace('0', index)).prop('name', blockPosition.prop('name').replace('0', index));
 		blockVisibility.prop('id', blockVisibility.prop('id').replace('0', index)).prop('name', blockVisibility.prop('name').replace('0', index));
 
 		// save position
 		blockPosition.val(selectedPosition);
+
+		// save type
+		blockType.val(selectedType);
 
 		// save extra id
 		blockExtraId.val(selectedExtraId);
@@ -95,13 +100,11 @@ jsBackend.pages.extras =
 		var visible = blockVisibility.attr('checked');
 
 		// add visual representation of block to template visualisation
-		var addedVisual = jsBackend.pages.extras.addBlockVisual(selectedPosition, index, selectedExtraId, visible);
+		var addedVisual = jsBackend.pages.extras.addBlockVisual(selectedPosition, index, selectedExtraId, selectedType, visible);
 
-		// block/widget = don't show editor
-		if(typeof extrasById != 'undefined' && typeof extrasById[selectedExtraId] != 'undefined') $('.blockContentHTML', block).hide();
-
-		// editor
-		else $('.blockContentHTML', block).show();
+		// show/hide editor
+		if(selectedType == 'add_now_html') $('.blockContentHTML', block).show();
+		else $('.blockContentHTML', block).hide();
 
 		// reset block indexes
 //		jsBackend.pages.extras.resetIndexes();
@@ -110,31 +113,36 @@ jsBackend.pages.extras =
 	},
 
 	// add block visual on template
-	addBlockVisual: function(position, index, extraId, visible)
+	addBlockVisual: function(position, index, extraId, type, visible)
 	{
 		// check if the extra is valid
 		if(extraId != 0 && typeof extrasById[extraId] == 'undefined') return false;
+
+		// init vars
+		var editLink = '';
+		var className = '';
+		var title = '';
+		var description = '';
 
 		// block
 		if(extraId != 0)
 		{
 			// link to edit this block/widget
-			var editLink = '';
 			if(extrasById[extraId].type == 'block' && extrasById[extraId].data.url) editLink = extrasById[extraId].data.url;
 			if(typeof extrasById[extraId].data.edit_url != 'undefined' && extrasById[extraId].data.edit_url) editLink = extrasById[extraId].data.edit_url;
 
 			// title, description & visibility
-			var title = extrasById[extraId].human_name;
-			var description = extrasById[extraId].path;
+			title = extrasById[extraId].human_name;
+			description = extrasById[extraId].path;
 		}
 
 		// editor
-		else
+		else if(type == 'add_now_html')
 		{
-			// link to edit this content, title, description & visibility
-			var editLink = '';
-			var title = utils.string.ucfirst(jsBackend.locale.lbl('Editor'));
-			var description = utils.string.stripTags($('#blockHtml' + index).val()).substr(0, 200);
+			// title, description & class
+			title = utils.string.ucfirst(jsBackend.locale.lbl('Editor'));
+			description = utils.string.stripTags($('#blockHtml' + index).val()).substr(0, 200);
+			className = 'showEditor ';
 		}
 
 		// create html to be appended in template-view
@@ -142,7 +150,7 @@ jsBackend.pages.extras =
 							'<span class="templateTitle">' + title + '</span>' +
 							'<span class="templateDescription">' + description + '</span>' +
 							'<div class="buttonHolder">' +
-								'<a href="' + (editLink ? editLink : '#') + '" class="' + (extraId == 0 ? 'showEditor ' : '') + 'button icon iconOnly iconEdit' + '"' + (extraId != 0 && editLink ? ' target="_blank"' : '') + (extraId != 0 && editLink ? '' : ' onclick="return false;"') + ((extraId != 0 && editLink) || extraId == 0 ? '' : 'style="display: none;" ') + '><span>' + utils.string.ucfirst(jsBackend.locale.lbl('Edit')) + '</span></a>' +
+								'<a href="' + (editLink ? editLink : '#') + '" class="' + className + 'button icon iconOnly iconEdit' + '"' + (extraId != 0 && editLink ? ' target="_blank"' : '') + (extraId != 0 && editLink ? '' : ' onclick="return false;"') + ((extraId != 0 && editLink) || extraId == 0 ? '' : 'style="display: none;" ') + '><span>' + utils.string.ucfirst(jsBackend.locale.lbl('Edit')) + '</span></a>' +
 								'<a href="#" class="button icon iconOnly ' + (visible ? 'iconVisible ' : 'iconInvisible ') + 'toggleVisibility"><span>&nbsp;</span></a>' +
 								'<a href="#" class="deleteBlock button icon iconOnly iconDelete"><span>' + utils.string.ucfirst(jsBackend.locale.lbl('DeleteBlock')) + '</span></a>' +
 							'</div>' +
@@ -375,11 +383,13 @@ jsBackend.pages.extras =
 
 			// update index occurences in the hidden data
 			var blockHtml = $('.reset [name=block_html_' + oldIndex + ']');
+			var blockType = $('.reset [name=block_type_' + oldIndex + ']');
 			var blockExtraId = $('.reset [name=block_extra_id_' + oldIndex + ']');
 			var blockPosition = $('.reset [name=block_position_' + oldIndex + ']');
 			var blockVisible = $('.reset [name=block_visible_' + oldIndex + ']');
 
 			blockHtml.prop('id', blockHtml.prop('id').replace(oldIndex, newIndex)).prop('name', blockHtml.prop('name').replace(oldIndex, newIndex));
+			blockType.prop('id', blockType.prop('id').replace(oldIndex, newIndex)).prop('name', blockType.prop('name').replace(oldIndex, newIndex));
 			blockExtraId.prop('id', blockExtraId.prop('id').replace(oldIndex, newIndex)).prop('name', blockExtraId.prop('name').replace(oldIndex, newIndex));
 			blockPosition.prop('id', blockPosition.prop('id').replace(oldIndex, newIndex)).prop('name', blockPosition.prop('name').replace(oldIndex, newIndex));
 			blockVisible.prop('id', blockVisible.prop('id').replace(oldIndex, newIndex)).prop('name', blockVisible.prop('name').replace(oldIndex, newIndex));
@@ -450,11 +460,12 @@ jsBackend.pages.extras =
 						'id': 'addBlockButton',
 						click: function()
 						{
-							// fetch the selected extra id
+							// fetch the selected extra type and id
+							var selectedType = $('#extraType').val();
 							var selectedExtraId = $('#extraExtraId').val();
 
 							// add the extra
-							var index = jsBackend.pages.extras.addBlock(selectedExtraId, position);
+							var index = jsBackend.pages.extras.addBlock(selectedType, selectedExtraId, position);
 
 							// add a block = template is no longer original
 							jsBackend.pages.template.original = false;
@@ -463,7 +474,7 @@ jsBackend.pages.extras =
 							$(this).dialog('close');
 
 							// if the added block was an editor, show the editor immediately
-							if(index && !(typeof extrasById != 'undefined' && typeof extrasById[selectedExtraId] != 'undefined'))
+							if(index && selectedType == 'add_now_html')
 							{
 								$('.templatePositionCurrentType[data-block-id=' + index + '] .showEditor').click();
 							}
@@ -743,6 +754,7 @@ jsBackend.pages.template =
 		{
 			// fetch variables
 			var index = $('input[id^=blockExtraId]', this).prop('id').replace('blockExtraId', '');
+			var type = $('input[id^=blockType]', this).val();
 			var extraId = parseInt($('input[id^=blockExtraId]', this).val());
 			var position = $('input[id^=blockPosition]', this).val();
 			var visible = $('input[id^=blockVisible]', this).attr('checked');
@@ -764,7 +776,7 @@ jsBackend.pages.template =
 			}
 
 			// add visual representation of block to template visualisation
-			added = jsBackend.pages.extras.addBlockVisual(position, index, extraId, visible);
+			added = jsBackend.pages.extras.addBlockVisual(position, index, extraId, type, visible);
 
 			// if the visual could be not added, remove the content entirely
 			if(!added) $(this).remove();
