@@ -30,6 +30,9 @@ jsBackend.pages =
 
 		// do meta
 		if($('#title').length > 0) $('#title').doMeta();
+
+		// select input value if needed
+		if($('input.select').length > 0) $('input.select').select();
 	}
 }
 

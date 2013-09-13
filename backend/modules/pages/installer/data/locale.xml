@@ -160,6 +160,18 @@
         <translation language="es"><![CDATA[meta navegación]]></translation>
         <translation language="uk"><![CDATA[Мета]]></translation>
       </item>
+      <item type="label" name="NewPage">
+        <translation language="nl"><![CDATA[nieuwe pagina]]></translation>
+        <translation language="en"><![CDATA[new page]]></translation>
+        <translation language="it"><![CDATA[nuova pagina]]></translation>
+        <translation language="ru"><![CDATA[новая страница]]></translation>
+        <translation language="zh"><![CDATA[新的一頁]]></translation>
+        <translation language="de"><![CDATA[neue Seite]]></translation>
+        <translation language="fr"><![CDATA[nouvelle page]]></translation>
+        <translation language="hu"><![CDATA[új oldal]]></translation>
+        <translation language="es"><![CDATA[nueva página]]></translation>
+        <translation language="uk"><![CDATA[нова сторінка]]></translation>
+      </item>
       <item type="label" name="Redirect">
         <translation language="nl"><![CDATA[redirect]]></translation>
         <translation language="en"><![CDATA[redirect]]></translation>
