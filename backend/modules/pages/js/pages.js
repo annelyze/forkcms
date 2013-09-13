@@ -274,7 +274,7 @@ jsBackend.pages.extras =
 		$('#extraExtraId').html('<option id="defaultExtraIdOption" value="0">-</option>');
 
 		// only show the extra id dropdown if the selected type is a valid module
-		if(typeof extrasData[selectedType]['items'] != 'undefined')
+		if(typeof extrasData[selectedType] != 'undefined' && typeof extrasData[selectedType]['items'] != 'undefined')
 		{
 			// init var
 			var hasModules = false;
@@ -430,7 +430,7 @@ jsBackend.pages.extras =
 		position = $(this).parent().parent().attr('data-position');
 
 		// set type
-		$('#extraType').val('html');
+		$('#extraType').val('add_now_html');
 		$('#extraExtraId').html('<option id="defaultExtraIdOption" value="0">-</option>').val(0);
 		$('#extraExtraIdHolder').hide();
 
@@ -446,7 +446,8 @@ jsBackend.pages.extras =
 				buttons:
 				[
 					{
-						text: utils.string.ucfirst(jsBackend.locale.lbl('OK')),
+						text: utils.string.ucfirst(jsBackend.locale.lbl('Next')),
+						'id': 'addBlockButton',
 						click: function()
 						{
 							// fetch the selected extra id
@@ -482,6 +483,18 @@ jsBackend.pages.extras =
 				]
 			});
 		}
+
+		// change modal button text if the extra type changes
+		$('#extraType').on('change', function()
+		{
+			console.log($(this).val());
+			console.log($(this).val().substr(0, 8));
+			if($(this).val().substr(0, 8) == 'add_now_')
+			{
+				$('#addBlockButton span').html(utils.string.ucfirst(jsBackend.locale.lbl('Next')));
+			}
+			else $('#addBlockButton span').html(utils.string.ucfirst(jsBackend.locale.lbl('Save')));
+		});
 	},
 
 	// delete a block
