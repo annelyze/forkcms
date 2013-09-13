@@ -487,8 +487,6 @@ jsBackend.pages.extras =
 		// change modal button text if the extra type changes
 		$('#extraType').on('change', function()
 		{
-			console.log($(this).val());
-			console.log($(this).val().substr(0, 8));
 			if($(this).val().substr(0, 8) == 'add_now_')
 			{
 				$('#addBlockButton span').html(utils.string.ucfirst(jsBackend.locale.lbl('Next')));
