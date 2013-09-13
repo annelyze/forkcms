@@ -480,6 +480,17 @@
         <translation language="hu"><![CDATA[A modul már kapcsolódik az oldalhoz.]]></translation>
         <translation language="es"><![CDATA[Un módulo ya ha sido vinculado a esta página.]]></translation>
       </item>
+      <item type="message" name="PageIsBeingSaved">
+        <translation language="nl"><![CDATA[De pagina wordt opgeslagen.]]></translation>
+        <translation language="en"><![CDATA[The page is being saved.]]></translation>
+        <translation language="it"><![CDATA[La pagina viene salvata.]]></translation>
+        <translation language="ru"><![CDATA[Страница сохраняется.]]></translation>
+        <translation language="zh"><![CDATA[頁面被保存]]></translation>
+        <translation language="de"><![CDATA[Die Seite wird gespeichert.]]></translation>
+        <translation language="fr"><![CDATA[La page est en cours d'enregistrement]]></translation>
+        <translation language="hu"><![CDATA[Az oldal mentését.]]></translation>
+        <translation language="es"><![CDATA[La página se está guardando.]]></translation>
+      </item>
       <item type="message" name="PageIsMoved">
         <translation language="nl"><![CDATA[De pagina "%1$s" werd verplaatst.]]></translation>
         <translation language="en"><![CDATA[The page "%1$s" was moved.]]></translation>
