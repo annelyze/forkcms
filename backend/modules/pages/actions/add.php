@@ -112,7 +112,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		$this->tpl->assign('defaultTemplateId', $defaultTemplateId);
 
 		// create elements
-		$this->frm->addText('title', null, null, 'inputText title', 'inputTextError title');
+		$this->frm->addText('title', BL::lbl('NewPage'), null, 'inputText title select', 'inputTextError title');
 		$this->frm->addEditor('html');
 		$this->frm->addHidden('template_id', $defaultTemplateId);
 		$this->frm->addRadiobutton('hidden', array(array('label' => BL::lbl('Hidden'), 'value' => 'Y'), array('label' => BL::lbl('Published'), 'value' => 'N')), 'N');
