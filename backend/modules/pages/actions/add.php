@@ -14,6 +14,7 @@
  * @author Tijs Verkoyen <tijs@sumocoders.be>
  * @author Davy Hellemans <davy.hellemans@netlash.com>
  * @author Jelmer Snoeck <jelmer@siphoc.com>
+ * @author Annelies Van Extergem <annelies@annelyze.be>
  */
 class BackendPagesAdd extends BackendBaseActionAdd
 {
@@ -23,6 +24,13 @@ class BackendPagesAdd extends BackendBaseActionAdd
 	 * @var	array
 	 */
 	private $blocksContent = array();
+
+	/**
+	 * The extras
+	 *
+	 * @var	array
+	 */
+	private $extras = array();
 
 	/**
 	 * Is the current user a god user?
@@ -37,13 +45,6 @@ class BackendPagesAdd extends BackendBaseActionAdd
 	 * @var	array
 	 */
 	private $positions = array();
-
-	/**
-	 * The extras
-	 *
-	 * @var	array
-	 */
-	private $extras = array();
 
 	/**
 	 * The template data
@@ -137,6 +138,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		// build prototype block
 		$block['index'] = 0;
 		$block['formElements']['chkVisible'] = $this->frm->addCheckbox('block_visible_' . $block['index'], true);
+		$block['formElements']['hidType'] = $this->frm->addHidden('block_type_' . $block['index'], 'add_now_html');
 		$block['formElements']['hidExtraId'] = $this->frm->addHidden('block_extra_id_' . $block['index'], 0);
 		$block['formElements']['hidPosition'] = $this->frm->addHidden('block_position_' . $block['index'], 'fallback');
 		$block['formElements']['txtHTML'] = $this->frm->addTextArea('block_html_' . $block['index']); // this is no editor; we'll add the editor in JS
@@ -162,26 +164,25 @@ class BackendPagesAdd extends BackendBaseActionAdd
 				$block['position'] = $_POST['block_position_' . $i];
 				$positions[$block['position']][] = $block;
 
-				// set linked extra
+				// set linked extra and type
 				$block['extra_id'] = $_POST['block_extra_id_' . $i];
+				$block['type'] = $_POST['block_type_' . $i];
 
 				// reset some stuff
 				if($block['extra_id'] <= 0) $block['extra_id'] = null;
 
 				// init vars
-				$block['type'] = 'extra';
 				$block['html'] = null;
 
 				// extra-type is HTML
-				if($block['extra_id'] === null)
+				if($block['type'] === 'add_now_html')
 				{
 					// reset vars
-					$block['type'] = 'html';
 					$block['extra_id'] = null;
 					$block['html'] = $_POST['block_html_' . $i];
 				}
 
-				// not HTML
+				// extra-type is module content
 				else
 				{
 					// type of block
@@ -214,6 +215,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		{
 			$block['index'] = $i + 1;
 			$block['formElements']['chkVisible'] = $this->frm->addCheckbox('block_visible_' . $block['index'], $block['visible'] == 'Y');
+			$block['formElements']['hidType'] = $this->frm->addHidden('block_type_' . $block['index'], $block['type']);
 			$block['formElements']['hidExtraId'] = $this->frm->addHidden('block_extra_id_' . $block['index'], (int) $block['extra_id']);
 			$block['formElements']['hidPosition'] = $this->frm->addHidden('block_position_' . $block['index'], $block['position']);
 			$block['formElements']['txtHTML'] = $this->frm->addTextArea('block_html_' . $block['index'], $block['html']); // this is no editor; we'll add the editor in JS

@@ -790,7 +790,7 @@ class BackendPagesModel
 		$language = ($language === null) ? BackendLanguage::getWorkingLanguage() : (string) $language;
 
 		// get page (active version)
-		return (array) BackendModel::getContainer()->get('database')->getRecords(
+		$blocks = (array) BackendModel::getContainer()->get('database')->getRecords(
 			'SELECT b.*, UNIX_TIMESTAMP(b.created_on) AS created_on, UNIX_TIMESTAMP(b.edited_on) AS edited_on
 			 FROM pages_blocks AS b
 			 INNER JOIN pages AS i ON b.revision_id = i.revision_id
@@ -798,6 +798,15 @@ class BackendPagesModel
 				ORDER BY b.sequence ASC',
 			array($id, $revisionId, $language)
 		);
+
+		// reformat data
+		foreach($blocks as $i => $block)
+		{
+			$blocks[$i]['type'] = ($block['type'] == 'extra' ? $block['type'] : 'add_now_' . $block['type']);
+		}
+
+		// return data
+		return $blocks;
 	}
 
 	/**
@@ -1489,6 +1498,9 @@ class BackendPagesModel
 		// loop blocks
 		foreach($blocks as $block)
 		{
+			// reformat data
+			$block['type'] = str_replace('add_now_', '', $block['type']);
+
 			// insert blocks
 			$db->insert('pages_blocks', $block);
 		}
