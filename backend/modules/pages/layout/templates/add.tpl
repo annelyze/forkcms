@@ -77,9 +77,6 @@
 						<div class="box contentBlock" style="margin: 0;">
 							<div class="blockContentHTML optionsRTE">
 								<fieldset>
-									<div class="generalMessage singleMessage infoMessage">
-										{$msgContentSaveWarning}
-									</div>
 									<div class="heading">
 										<h3>{$lblEditor|ucfirst}</h3>
 									</div>
@@ -362,9 +359,6 @@
 <div class="box" id="blockHtml" style="display: none;">
 	<div class="blockContentHTML optionsRTE">
 		<fieldset>
-			<div class="generalMessage singleMessage infoMessage">
-				{$msgContentSaveWarning}
-			</div>
 			<div class="heading">
 				<h3>{$lblEditor|ucfirst}</h3>
 			</div>
