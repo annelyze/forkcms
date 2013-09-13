@@ -201,7 +201,7 @@ jsBackend.pages.extras =
 			buttons:
 			[
 				{
-					text: utils.string.ucfirst(jsBackend.locale.lbl('OK')),
+					text: utils.string.ucfirst(jsBackend.locale.lbl('Save')),
 					click: function()
 					{
 						// grab the content
@@ -215,6 +215,9 @@ jsBackend.pages.extras =
 
 						// close dialog
 						$(this).dialog('close');
+
+						// save page
+						jsBackend.pages.extras.savePage();
 					}
 				},
 				{
@@ -406,6 +409,17 @@ jsBackend.pages.extras =
 		jsBackend.pages.extras.updatedBlock($('.templatePositionCurrentType[data-block-id=' + index + ']'));
 	},
 
+	// show a message and save the page
+	savePage: function()
+	{
+		// show message
+		jsBackend.messages.add('warning', jsBackend.locale.msg('PageIsBeingSaved'));
+
+		// save page (as draft if we're adding a page)
+		if($('#formAdd').length > 0 || $('#draft').length > 0) $('#saveAsDraft').click();
+		else $('form').submit();
+	},
+
 	// add a block
 	showAddDialog: function(e)
 	{
@@ -452,6 +466,9 @@ jsBackend.pages.extras =
 							{
 								$('.templatePositionCurrentType[data-block-id=' + index + '] .showEditor').click();
 							}
+
+							// save the page if a module block was added
+							else jsBackend.pages.extras.savePage();
 						}
 					},
 					{

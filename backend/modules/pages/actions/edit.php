@@ -209,6 +209,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		$this->frm->addText('title', $this->record['title'], null, 'inputText title', 'inputTextError title');
 		$this->frm->addEditor('html');
 		$this->frm->addHidden('template_id', $this->record['template_id']);
+		if($this->record['status'] == 'draft') $this->frm->addHidden('draft', true);
 		$this->frm->addRadiobutton('hidden', array(array('label' => BL::lbl('Hidden'), 'value' => 'Y'), array('label' => BL::lbl('Published'), 'value' => 'N')), $this->record['hidden']);
 
 		// a god user should be able to adjust the detailed settings for a page easily
