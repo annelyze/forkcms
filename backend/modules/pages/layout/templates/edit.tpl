@@ -2,7 +2,7 @@
 {include:{$BACKEND_MODULES_PATH}/pages/layout/templates/structure_start.tpl}
 
 {form:edit}
-	{$hidDraft}
+	{option:hidDraft}{$hidDraft}{/option:hidDraft}
 	{$hidTemplateId}
 
 	<div class="pageTitle">
