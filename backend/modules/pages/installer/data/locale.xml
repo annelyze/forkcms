@@ -185,6 +185,18 @@
         <translation language="es"><![CDATA[nueva página]]></translation>
         <translation language="uk"><![CDATA[нова сторінка]]></translation>
       </item>
+      <item type="label" name="NewPage">
+        <translation language="nl"><![CDATA[nieuwe pagina]]></translation>
+        <translation language="en"><![CDATA[new page]]></translation>
+        <translation language="it"><![CDATA[nuova pagina]]></translation>
+        <translation language="ru"><![CDATA[новая страница]]></translation>
+        <translation language="zh"><![CDATA[新的一頁]]></translation>
+        <translation language="de"><![CDATA[neue Seite]]></translation>
+        <translation language="fr"><![CDATA[nouvelle page]]></translation>
+        <translation language="hu"><![CDATA[új oldal]]></translation>
+        <translation language="es"><![CDATA[nueva página]]></translation>
+        <translation language="uk"><![CDATA[нова сторінка]]></translation>
+      </item>
       <item type="label" name="Redirect">
         <translation language="nl"><![CDATA[redirect]]></translation>
         <translation language="en"><![CDATA[redirect]]></translation>
@@ -250,6 +262,19 @@
         <translation language="es"><![CDATA[formulario de baja]]></translation>
         <translation language="uk"><![CDATA[Форма відписки]]></translation>
         <translation language="el"><![CDATA[Φόρμα αποποίησης εγγραφής]]></translation>
+      </item>
+      <item type="label" name="Video">
+        <translation language="nl"><![CDATA[video]]></translation>
+        <translation language="en"><![CDATA[video]]></translation>
+        <translation language="it"><![CDATA[Video]]></translation>
+        <translation language="ru"><![CDATA[видео]]></translation>
+        <translation language="zh"><![CDATA[视频]]></translation>
+        <translation language="de"><![CDATA[Video]]></translation>
+        <translation language="fr"><![CDATA[vidéo]]></translation>
+        <translation language="hu"><![CDATA[videó]]></translation>
+        <translation language="es"><![CDATA[vídeo]]></translation>
+        <translation language="uk"><![CDATA[відео]]></translation>
+        <translation language="lt"><![CDATA[video]]></translation>
       </item>
       <item type="label" name="Video">
         <translation language="nl"><![CDATA[video]]></translation>
@@ -535,6 +560,17 @@
         <translation language="hu"><![CDATA[Az oldal mentését.]]></translation>
         <translation language="es"><![CDATA[La página se está guardando.]]></translation>
       </item>
+      <item type="message" name="PageIsBeingSaved">
+        <translation language="nl"><![CDATA[De pagina wordt opgeslagen.]]></translation>
+        <translation language="en"><![CDATA[The page is being saved.]]></translation>
+        <translation language="it"><![CDATA[La pagina viene salvata.]]></translation>
+        <translation language="ru"><![CDATA[Страница сохраняется.]]></translation>
+        <translation language="zh"><![CDATA[頁面被保存]]></translation>
+        <translation language="de"><![CDATA[Die Seite wird gespeichert.]]></translation>
+        <translation language="fr"><![CDATA[La page est en cours d'enregistrement]]></translation>
+        <translation language="hu"><![CDATA[Az oldal mentését.]]></translation>
+        <translation language="es"><![CDATA[La página se está guardando.]]></translation>
+      </item>
       <item type="message" name="PageIsMoved">
         <translation language="nl"><![CDATA[De pagina "%1$s" werd verplaatst.]]></translation>
         <translation language="en"><![CDATA[The page "%1$s" was moved.]]></translation>
@@ -570,6 +606,32 @@
         <translation language="hu"><![CDATA[<strong>Figyelmeztetés:</strong> A megváltozott sablon másik helyre mutat vagy nem létezik.]]></translation>
         <translation language="es"><![CDATA[<strong>Atención:</strong> Cambiar la plantilla puede hacer que el contenido existente esté en otro lugar o que ya no se muestre.]]></translation>
         <translation language="el"><![CDATA[<strong>Προσοχή:</strong> Αν αλλάξετε το πρότυπο μπορεί το υπάρχον περιεχόμενο να εμφανισθεί σε άλλη περιοχή ή και να μη φαίνεται καθόλου.]]></translation>
+      </item>
+      <item type="message" name="WhichExtra">
+        <translation language="nl"><![CDATA[Wat moet er getoond worden?]]></translation>
+        <translation language="en"><![CDATA[What should it display?]]></translation>
+        <translation language="hu"><![CDATA[Mit is megjeleníteni?]]></translation>
+        <translation language="it"><![CDATA[Che cosa dovrebbe mostrare?]]></translation>
+        <translation language="ru"><![CDATA[Что она должна отображать?]]></translation>
+        <translation language="zh"><![CDATA[它應該是什麼顯示？]]></translation>
+        <translation language="fr"><![CDATA[Que devrait-il afficher?]]></translation>
+        <translation language="de"><![CDATA[Was sollte sie anzuzeigen?]]></translation>
+        <translation language="es"><![CDATA[¿Qué debe mostrar?]]></translation>
+        <translation language="lt"><![CDATA[Ką ji turėtų rodyti?]]></translation>
+        <translation language="uk"><![CDATA[Що вона повинна відображати?]]></translation>
+      </item>
+      <item type="message" name="WhichType">
+        <translation language="nl"><![CDATA[Wat wil je toevoegen?]]></translation>
+        <translation language="en"><![CDATA[What do you want to add?]]></translation>
+        <translation language="hu"><![CDATA[Mit akarsz hozzáadni?]]></translation>
+        <translation language="it"><![CDATA[Cosa vuoi aggiungere?]]></translation>
+        <translation language="ru"><![CDATA[Что вы хотите добавить?]]></translation>
+        <translation language="zh"><![CDATA[你想添加什麼？]]></translation>
+        <translation language="fr"><![CDATA[Que voulez-vous ajouter?]]></translation>
+        <translation language="de"><![CDATA[Was wissen Sie hinzufügen möchten?]]></translation>
+        <translation language="es"><![CDATA[¿Qué quieres añadir?]]></translation>
+        <translation language="lt"><![CDATA[Ką norite pridėti?]]></translation>
+        <translation language="uk"><![CDATA[Що ви хочете додати?]]></translation>
       </item>
       <item type="message" name="WhichExtra">
         <translation language="nl"><![CDATA[Wat moet er getoond worden?]]></translation>
