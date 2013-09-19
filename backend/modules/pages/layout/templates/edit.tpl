@@ -100,6 +100,9 @@
 								</fieldset>
 							</div>
 
+							{* this will store the general image path and the image name *}
+							{$positions.blocks.hidImage}
+
 							{* this will store the selected type *}
 							{$positions.blocks.hidType}
 
@@ -418,6 +421,21 @@
 			</div>
 			{$txtHtml}
 			{$txtHtmlError}
+		</fieldset>
+	</div>
+</div>
+
+<div class="box" id="blockImage" style="display: none;">
+	<div class="blockContentImage">
+		<fieldset>
+			<p id="blockImageCurrentImage" style="height: 200px; display: none;">&nbsp;</p>
+			<p>
+				<label for="image">{$lblFile|ucfirst}</label>
+				{$fileImage}
+				{$fileImageError}
+				{$hidImageIndex}
+				{$hidImagePath}
+			</p>
 		</fieldset>
 	</div>
 </div>

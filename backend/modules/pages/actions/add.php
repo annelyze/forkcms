@@ -7,6 +7,9 @@
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOException;
+
 /**
  * This is the add-action, it will display a form to create a new item
  *
@@ -115,6 +118,8 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		// create elements
 		$this->frm->addText('title', BL::lbl('NewPage'), null, 'inputText title select', 'inputTextError title');
 		$this->frm->addEditor('html');
+		$this->frm->addImage('image');
+		$this->frm->addHidden('image_index');
 		$this->frm->addHidden('template_id', $defaultTemplateId);
 		$this->frm->addRadiobutton('hidden', array(array('label' => BL::lbl('Hidden'), 'value' => 'Y'), array('label' => BL::lbl('Published'), 'value' => 'N')), 'N');
 
@@ -142,6 +147,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 		$block['formElements']['hidExtraId'] = $this->frm->addHidden('block_extra_id_' . $block['index'], 0);
 		$block['formElements']['hidPosition'] = $this->frm->addHidden('block_position_' . $block['index'], 'fallback');
 		$block['formElements']['txtHTML'] = $this->frm->addTextArea('block_html_' . $block['index']); // this is no editor; we'll add the editor in JS
+		$block['formElements']['hidImage'] = $this->frm->addHidden('block_image_' . $block['index'], '');
 
 		// add default block to "fallback" position, the only one which we can rest assured to exist
 		$this->positions['fallback']['blocks'][] = $block;
@@ -182,6 +188,13 @@ class BackendPagesAdd extends BackendBaseActionAdd
 					$block['html'] = $_POST['block_html_' . $i];
 				}
 
+				// extra-type is image
+				elseif($block['type'] === 'add_now_image')
+				{
+					// reset vars
+					$block['extra_id'] = null;
+				}
+
 				// extra-type is module content
 				else
 				{
@@ -219,6 +232,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 			$block['formElements']['hidExtraId'] = $this->frm->addHidden('block_extra_id_' . $block['index'], (int) $block['extra_id']);
 			$block['formElements']['hidPosition'] = $this->frm->addHidden('block_position_' . $block['index'], $block['position']);
 			$block['formElements']['txtHTML'] = $this->frm->addTextArea('block_html_' . $block['index'], $block['html']); // this is no editor; we'll add the editor in JS
+			$block['formElements']['hidImage'] = $this->frm->addHidden('block_image_' . $block['index'], '');
 
 			$this->positions[$block['position']]['blocks'][] = $block;
 		}
@@ -307,6 +321,14 @@ class BackendPagesAdd extends BackendBaseActionAdd
 			// validate fields
 			$this->frm->getField('title')->isFilled(BL::err('TitleIsRequired'));
 
+			// validate image if needed
+			if($this->frm->getField('image')->isFilled())
+			{
+				// image extension and mime type
+				$this->frm->getField('image')->isAllowedExtension(array('jpg', 'png', 'gif', 'jpeg'), BL::err('JPGGIFAndPNGOnly'));
+				$this->frm->getField('image')->isAllowedMimeType(array('image/jpg', 'image/png', 'image/gif', 'image/jpeg'), BL::err('JPGGIFAndPNGOnly'));
+			}
+
 			// validate meta
 			$this->meta->validate();
 
@@ -359,14 +381,53 @@ class BackendPagesAdd extends BackendBaseActionAdd
 				// insert page, store the id, we need it when building the blocks
 				$page['revision_id'] = BackendPagesModel::insert($page);
 
+				// get saved image index
+				$imageIndex = $this->frm->getField('image_index')->getValue();
+
 				// loop blocks
 				foreach($this->blocksContent as $i => $block)
 				{
+					// validate blocks, only save blocks for valid positions
+					if(!in_array($block['position'], $this->templates[$this->frm->getField('template_id')->getValue()]['data']['names']))
+					{
+						unset($this->blocksContent[$i]);
+						continue;
+					}
+
 					// add page revision id to blocks
 					$this->blocksContent[$i]['revision_id'] = $page['revision_id'];
 
-					// validate blocks, only save blocks for valid positions
-					if(!in_array($block['position'], $this->templates[$this->frm->getField('template_id')->getValue()]['data']['names'])) unset($this->blocksContent[$i]);
+					// reformat data
+					$this->blocksContent[$i]['type'] = str_replace('add_now_', '', $block['type']);
+
+					// save image if needed
+					if($imageIndex == ($i + 1) && $this->frm->getField('image')->isFilled())
+					{
+						// the image path
+						$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . $page['id'];
+
+						// create folders if needed
+						$fs = new Filesystem();
+						if(!$fs->exists($imagePath . '/source')) $fs->mkdir($imagePath . '/source');
+						if(!$fs->exists($imagePath . '/50x50')) $fs->mkdir($imagePath . '/50x50'); // thumbnail
+						if(!$fs->exists($imagePath . '/x200')) $fs->mkdir($imagePath . '/x200'); // for edit block pop-up
+						if(!$fs->exists($imagePath . '/900x')) $fs->mkdir($imagePath . '/900x'); // for use in the site
+
+						// build image name with original image name
+						$imageName = str_replace(' ' , '_', $this->frm->getField('image')->getFileName(false));
+						$imageExtension = $this->frm->getField('image')->getExtension();
+						$this->blocksContent[$i]['image'] = $imageName . '.' . $imageExtension;
+						$counter = 1;
+
+						// add number if filename exists
+						while($fs->exists($imagePath . '/source/' . $this->blocksContent[$i]['image']))
+						{
+							$this->blocksContent[$i]['image'] = $imageName . $counter++ . '.' . $imageExtension;
+						}
+
+						// upload the image & generate thumbnails
+						$this->frm->getField('image')->generateThumbnails($imagePath, $this->blocksContent[$i]['image']);
+					}
 				}
 
 				// insert the blocks

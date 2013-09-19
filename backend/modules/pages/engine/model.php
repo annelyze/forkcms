@@ -9,6 +9,7 @@
 
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Finder\Finder;
 
 /**
  * In this file we store all generic functions that we will be using in the PagesModule
@@ -686,6 +687,10 @@ class BackendPagesModel
 		// delete page and the revisions
 		if(!empty($revisionIDs)) $db->delete('pages', 'revision_id IN (' . implode(',', $revisionIDs) . ')');
 
+		// delete images
+		$fs = new Filesystem();
+		$fs->remove(FRONTEND_FILES_PATH . '/pages/images/' . $id);
+
 		// delete tags
 		BackendTagsModel::saveTags($id, '', 'pages');
 
@@ -1343,7 +1348,8 @@ class BackendPagesModel
 		// init types with user generated types
 		$types = array(
 			$labelAddNow => array(
-				'add_now_html' => BL::lbl('Text')
+				'add_now_html' => BL::lbl('Text'),
+				'add_now_image' => BL::lbl('Image')
 			),
 			$labelModuleContent => array()
 		);
@@ -1701,8 +1707,30 @@ class BackendPagesModel
 			// any revisions to delete
 			if(!empty($revisionsToDelete))
 			{
+				// delete page revisions and blocks
 				$db->delete('pages', 'revision_id IN(' . implode(', ', $revisionsToDelete) . ')');
 				$db->delete('pages_blocks', 'revision_id IN(' . implode(', ', $revisionsToDelete) . ')');
+
+				// get images to keep
+				$keepImages = (array) $db->getColumn(
+					'SELECT DISTINCT i.image
+					 FROM pages_blocks AS i
+					 WHERE i.image IS NOT NULL AND i.revision_id IN (' . implode(', ', $revisionIdsToKeep) . ')'
+				);
+
+				// init vars
+				$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . $page['id'];
+				$finder = new Finder();
+
+				// check all images for this page
+				foreach($finder->files()->in($imagePath . '/source') as $image)
+				{
+					// keep this image because it is still used in a valid revision
+					if(in_array($image->getFilename(), $keepImages)) continue;
+
+					// delete this image, it is no longer used.
+					BackendModel::deleteThumbnails($imagePath, $image->getFilename());
+				}
 			}
 		}
 

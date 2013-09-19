@@ -55,6 +55,7 @@ jsBackend.pages.extras =
 		$(document).on('click', 'a.addBlock', jsBackend.pages.extras.showAddDialog);
 		$(document).on('click', 'a.deleteBlock', jsBackend.pages.extras.showDeleteDialog);
 		$(document).on('click', '.showEditor', jsBackend.pages.extras.editContent);
+		$(document).on('click', '.showImage', jsBackend.pages.extras.editImage);
 		$(document).on('click', '.toggleVisibility', jsBackend.pages.extras.toggleVisibility);
 
 		// make the default position sortable
@@ -72,6 +73,7 @@ jsBackend.pages.extras =
 
 		// update index occurences in the hidden data
 		var blockHtml = $('textarea[id^=blockHtml]', block);
+		var blockImage = $('input[id^=blockImage]', block);
 		var blockType = $('input[id^=blockType]', block);
 		var blockExtraId = $('input[id^=blockExtraId]', block);
 		var blockPosition = $('input[id^=blockPosition]', block);
@@ -79,6 +81,7 @@ jsBackend.pages.extras =
 
 		// update id & name to new index
 		blockHtml.prop('id', blockHtml.prop('id').replace('0', index)).prop('name', blockHtml.prop('name').replace('0', index));
+		blockImage.prop('id', blockImage.prop('id').replace('0', index)).prop('name', blockImage.prop('name').replace('0', index));
 		blockType.prop('id', blockType.prop('id').replace('0', index)).prop('name', blockType.prop('name').replace('0', index));
 		blockExtraId.prop('id', blockExtraId.prop('id').replace('0', index)).prop('name', blockExtraId.prop('name').replace('0', index));
 		blockPosition.prop('id', blockPosition.prop('id').replace('0', index)).prop('name', blockPosition.prop('name').replace('0', index));
@@ -105,6 +108,10 @@ jsBackend.pages.extras =
 		// show/hide editor
 		if(selectedType == 'add_now_html') $('.blockContentHTML', block).show();
 		else $('.blockContentHTML', block).hide();
+
+		// show/hide image fields
+		if(selectedType == 'add_now_image') $('.blockContentImage', block).show();
+		else $('.blockContentImage', block).hide();
 
 		// reset block indexes
 //		jsBackend.pages.extras.resetIndexes();
@@ -145,8 +152,18 @@ jsBackend.pages.extras =
 			className = 'showEditor ';
 		}
 
+		// image
+		else if(type == 'add_now_image')
+		{
+			// title, description & class
+			title = utils.string.ucfirst(jsBackend.locale.lbl('Image'));
+			image = $('#blockImage' + index).val();
+			if(image != '') description = '<img src="' + $('#imagePath').val() + '/50x50/' + image + '" alt="" />';
+			className = 'showImage ';
+		}
+
 		// create html to be appended in template-view
-		var blockHTML = '<div class="templatePositionCurrentType' + (visible ? ' ' : ' templateDisabled') + '" data-block-id="' + index + '">' +
+		var blockHTML = '<div class="templatePositionCurrentType' + (visible ? '' : ' templateDisabled') + (type == 'add_now_image' ? ' templateBlockImage' : '') + '" data-block-id="' + index + '">' +
 							'<span class="templateTitle">' + title + '</span>' +
 							'<span class="templateDescription">' + description + '</span>' +
 							'<div class="buttonHolder">' +
@@ -260,6 +277,83 @@ jsBackend.pages.extras =
 			{
 				// set content in editor
 				CKEDITOR.instances['html'].setData(previousContent);
+			}
+		});
+	},
+
+	// edit image
+	editImage: function(e)
+	{
+		// prevent default event action
+		e.preventDefault();
+
+		// fetch block index
+		var index = $(this).parent().parent().attr('data-block-id');
+
+		// placeholder for block node that will be moved by the jQuery dialog
+		$('#blockImage' + index).parent().after('<div id="blockPlaceholder"></div>');
+
+		// set image index so we know which one to edit
+		$('#imageIndex').val(index);
+
+		// show image preview if needed
+		var image = $('#blockImage' + index).val();
+		if(image != '')
+		{
+			$('#blockImageCurrentImage').html(
+				'<img src="' + $('#imagePath').val() + '/x200/' + $('#blockImage' + index).val() + '" alt="" />'
+			).show();
+		}
+
+		// show dialog
+		$('#blockImage').dialog(
+		{
+			closeOnEscape: false,
+			draggable: false,
+			resizable: false,
+			modal: true,
+			width: 640,
+			title: utils.string.ucfirst(jsBackend.locale.lbl('Image')),
+			position: 'center',
+			buttons:
+			[
+				{
+					text: utils.string.ucfirst(jsBackend.locale.lbl('Save')),
+					click: function()
+					{
+						// move node into form to get the field values
+						$(this).insertBefore(blockPlaceholder);
+
+						// save page
+						jsBackend.pages.extras.savePage();
+					}
+				},
+				{
+					text: utils.string.ucfirst(jsBackend.locale.lbl('Cancel')),
+					click: function()
+					{
+						// close the dialog
+						$(this).dialog('close');
+					}
+				}
+			],
+			// jQuery's dialog is so nice to move this node to display it well, but does not put it back where it belonged
+			close: function(e, ui)
+			{
+				// destroy dialog (to get rid of html order problems)
+				$(this).dialog('destroy');
+
+				// find block placeholder
+				var blockPlaceholder = $('#blockPlaceholder');
+
+				// move node back to the original position
+				$(this).insertBefore(blockPlaceholder);
+
+				// remove placeholder
+				blockPlaceholder.remove();
+
+				// hide image preview
+				$('#blockImageCurrentImage').html('&nbsp;').hide();
 			}
 		});
 	},
@@ -383,12 +477,14 @@ jsBackend.pages.extras =
 
 			// update index occurences in the hidden data
 			var blockHtml = $('.reset [name=block_html_' + oldIndex + ']');
+			var blockImage = $('.reset [name=block_image_' + oldIndex + ']');
 			var blockType = $('.reset [name=block_type_' + oldIndex + ']');
 			var blockExtraId = $('.reset [name=block_extra_id_' + oldIndex + ']');
 			var blockPosition = $('.reset [name=block_position_' + oldIndex + ']');
 			var blockVisible = $('.reset [name=block_visible_' + oldIndex + ']');
 
 			blockHtml.prop('id', blockHtml.prop('id').replace(oldIndex, newIndex)).prop('name', blockHtml.prop('name').replace(oldIndex, newIndex));
+			blockImage.prop('id', blockImage.prop('id').replace(oldIndex, newIndex)).prop('name', blockImage.prop('name').replace(oldIndex, newIndex));
 			blockType.prop('id', blockType.prop('id').replace(oldIndex, newIndex)).prop('name', blockType.prop('name').replace(oldIndex, newIndex));
 			blockExtraId.prop('id', blockExtraId.prop('id').replace(oldIndex, newIndex)).prop('name', blockExtraId.prop('name').replace(oldIndex, newIndex));
 			blockPosition.prop('id', blockPosition.prop('id').replace(oldIndex, newIndex)).prop('name', blockPosition.prop('name').replace(oldIndex, newIndex));
@@ -477,6 +573,12 @@ jsBackend.pages.extras =
 							if(index && selectedType == 'add_now_html')
 							{
 								$('.templatePositionCurrentType[data-block-id=' + index + '] .showEditor').click();
+							}
+
+							// if the added block was an image, show the image fields immediately
+							else if(index && selectedType == 'add_now_image')
+							{
+								$('.templatePositionCurrentType[data-block-id=' + index + '] .showImage').click();
 							}
 
 							// save the page if a module block was added

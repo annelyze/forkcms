@@ -32,7 +32,7 @@ CREATE TABLE IF NOT EXISTS `pages_blocks` (
  `type` enum('html', 'image', 'video', 'extra') NOT NULL default 'html',
  `extra_id` int(11) default NULL COMMENT 'The linked extra.',
  `html` text COMMENT 'if this block is HTML this field should contain the real HTML.',
- `image_file` varchar(255) COMMENT 'if this block is an image this field should contain the name of the image file.',
+ `image` varchar(255) COMMENT 'if this block is an image this field should contain the name of the image file.',
  `image_position` enum('left', 'center', 'right') NOT NULL default 'left' COMMENT 'if this block is an image this field should contain the position of the image.',
  `video_url` varchar(255) COMMENT 'if this block is a video this field should contain the URL to the video.',
  `created_on` datetime NOT NULL,
