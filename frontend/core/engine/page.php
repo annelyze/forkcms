@@ -218,8 +218,8 @@ class FrontendPage extends FrontendBaseObject
 			// loop blocks in position
 			foreach($blocks as $block)
 			{
-				// HTML provided?
-				if($block['html'] != '') $redirect = false;
+				// HTML or image provided?
+				if($block['html'] != '' || $block['image'] != '') $redirect = false;
 
 				// an decent extra provided?
 				if($block['extra_type'] == 'block') $redirect = false;
@@ -417,7 +417,7 @@ class FrontendPage extends FrontendBaseObject
 			foreach($blocks as $index => &$block)
 			{
 				// an extra
-				if($block['extra_id'] !== null)
+				if($block['type'] == 'extra')
 				{
 					// block
 					if($block['extra_type'] == 'block')
@@ -438,6 +438,20 @@ class FrontendPage extends FrontendBaseObject
 
 					// add to list of extras to parse
 					$this->extras[] = $extra;
+				}
+
+				// the block only contains an image
+				elseif($block['type'] == 'image')
+				{
+					// build block content for image
+					$blockContent = '<div class="pageBlockImage">';
+					$blockContent .= '<img src="' . FRONTEND_FILES_URL . '/pages/images/' . $this->record['id'] . '/900x/' . $block['image'] . '" alt="" />';
+					$blockContent .= '</div>';
+
+					$block = array(
+						'blockIsImage' => true,
+						'blockContent' => $blockContent
+					);
 				}
 
 				// the block only contains HTML
