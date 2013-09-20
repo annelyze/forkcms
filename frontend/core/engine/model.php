@@ -428,7 +428,7 @@ class FrontendModel extends BaseModel
 
 		// get blocks
 		$blocks = (array) $db->getRecords(
-			'SELECT pe.id AS extra_id, pb.html, pb.position,
+			'SELECT pe.id AS extra_id, pb.type, pb.html, pb.image, pb.position,
 			 pe.module AS extra_module, pe.type AS extra_type, pe.action AS extra_action, pe.data AS extra_data
 			 FROM pages_blocks AS pb
 			 INNER JOIN pages AS p ON p.revision_id = pb.revision_id
