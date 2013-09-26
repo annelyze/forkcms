@@ -2,7 +2,7 @@
 {include:{$BACKEND_MODULES_PATH}/pages/layout/templates/structure_start.tpl}
 
 {form:edit}
-	{option:hidDraft}{$hidDraft}{/option:hidDraft}
+	{option:pageIsDraft}<input type="hidden" name="status" value="draft" id="pageStatus" />{/option:pageIsDraft}
 	{$hidTemplateId}
 
 	<div class="pageTitle">
@@ -407,8 +407,15 @@
 		{/option:showPagesDelete}
 
 		<div class="buttonHolderRight">
-			<input id="editButton" class="inputButton button mainButton" type="submit" name="edit" value="{$lblSave|ucfirst}" />
-			<a href="#" id="saveAsDraft" class="inputButton button"><span>{$lblSaveDraft|ucfirst}</span></a>
+			{option:!pageIsDraft}
+				<input id="editButton" class="inputButton button mainButton" type="submit" name="edit" value="{$lblSave|ucfirst}" />
+				<a href="#" id="saveAsDraft" class="inputButton button"><span>{$lblSaveDraft|ucfirst}</span></a>
+			{/option:!pageIsDraft}
+
+			{option:pageIsDraft}
+				<input id="saveAsDraft" class="inputButton button mainButton" type="submit" name="edit" value="{$lblSaveDraft|ucfirst}" />
+				<a href="#" id="publishButton" class="inputButton button"><span>{$lblPublish|ucfirst}</span></a>
+			{/option:pageIsDraft}
 		</div>
 	</div>
 {/form:edit}

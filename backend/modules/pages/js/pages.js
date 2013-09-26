@@ -24,7 +24,23 @@ jsBackend.pages =
 		// button to save to draft
 		$('#saveAsDraft').on('click', function(e)
 		{
-			$('form').append('<input type="hidden" name="status" value="draft" />');
+			// add extra hidden status field if needed
+			if($('#pageStatus').length == 0)
+			{
+				$('form').append('<input type="hidden" name="status" value="draft" />');
+			}
+
+			// submit the form
+			$('form').submit();
+		});
+
+		// button to publish (if this is a draft)
+		$('#publishButton').on('click', function(e)
+		{
+			// remove hidden status field
+			$('#pageStatus').remove();
+
+			// submit the form
 			$('form').submit();
 		});
 
@@ -532,7 +548,7 @@ jsBackend.pages.extras =
 		$form.attr('action', $form.attr('action') + '#' + boxId);
 
 		// save page (as draft if we're adding a page)
-		if($('#formAdd').length > 0 || $('#draft').length > 0) $('#saveAsDraft').click();
+		if($('#formAdd').length > 0 || ($('#pageStatus').length > 0 && $('#pageStatus').val() == 'draft')) $('#saveAsDraft').click();
 		else $form.submit();
 	},
 

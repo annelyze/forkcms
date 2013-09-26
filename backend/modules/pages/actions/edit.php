@@ -220,7 +220,6 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		$this->frm->addHidden('image_index');
 		$this->frm->addHidden('image_path', $imagePath);
 		$this->frm->addHidden('template_id', $this->record['template_id']);
-		if($this->record['status'] == 'draft') $this->frm->addHidden('draft', true);
 		$this->frm->addRadiobutton('hidden', array(array('label' => BL::lbl('Hidden'), 'value' => 'Y'), array('label' => BL::lbl('Published'), 'value' => 'N')), $this->record['hidden']);
 
 		// a god user should be able to adjust the detailed settings for a page easily
@@ -441,6 +440,9 @@ class BackendPagesEdit extends BackendBaseActionEdit
 
 		// show delete button
 		$this->tpl->assign('showPagesDelete', $showDelete);
+
+		// page is draft
+		$this->tpl->assign('pageIsDraft', ($this->record['status'] == 'draft'));
 
 		// assign template
 		$this->tpl->assignArray($this->templates[$this->record['template_id']], 'template');
