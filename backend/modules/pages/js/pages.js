@@ -46,9 +46,6 @@ jsBackend.pages =
 
 		// do meta
 		if($('#title').length > 0) $('#title').doMeta();
-
-		// select input value if needed
-		if($('input.select').length > 0) $('input.select').select();
 	}
 }
 
@@ -548,7 +545,7 @@ jsBackend.pages.extras =
 		$form.attr('action', $form.attr('action') + '#' + boxId);
 
 		// save page (as draft if we're adding a page)
-		if($('#formAdd').length > 0 || ($('#pageStatus').length > 0 && $('#pageStatus').val() == 'draft')) $('#saveAsDraft').click();
+		if($('#pageStatus').length > 0 && $('#pageStatus').val() == 'draft') $('#saveAsDraft').click();
 		else $form.submit();
 	},
 
