@@ -28,6 +28,14 @@
 		</div>
 	</div>
 
+	{option:pageIsDraft}
+		<div class="generalMessage singleMessage infoMessage">
+			<p>
+				{$msgEditingDraft}
+			</p>
+		</div>
+	{/option:pageIsDraft}
+
 	<p id="pagesPageTitle">
 		<label for="title">{$lblTitle|ucfirst}</label>
 		{$txtTitle} {$txtTitleError}

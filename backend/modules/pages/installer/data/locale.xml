@@ -429,6 +429,18 @@
         <translation language="es"><![CDATA[La página "%1$s" ha sido guardada.]]></translation>
         <translation language="el"><![CDATA[Η σελίδα "%1$s" αποθηκεύτηκε.]]></translation>
       </item>
+      <item type="message" name="EditingDraft">
+        <translation language="nl"><![CDATA[De pagina die je momenteel bewerkt is een kladversie.]]></translation>
+        <translation language="en"><![CDATA[The page you are currently editing is a draft.]]></translation>
+        <translation language="it"><![CDATA[La pagina che si sta modificando è una bozza.]]></translation>
+        <translation language="ru"><![CDATA[Страница, которую вы в настоящее время редактирования является проектом.]]></translation>
+        <translation language="zh"><![CDATA[您正在編輯的頁面是一個草案版本。]]></translation>
+        <translation language="de"><![CDATA[Die Seite, die Sie gerade bearbeiten ist ein Entwurf.]]></translation>
+        <translation language="fr"><![CDATA[La page que vous êtes en train d'éditer est un brouillon]]></translation>
+        <translation language="hu"><![CDATA[Az oldal jelenleg szerkesztés alatt áll egy tervezet.]]></translation>
+        <translation language="es"><![CDATA[La página que está editando actualmente es un borrador.]]></translation>
+        <translation language="el"><![CDATA[Сторінка, яку ви в даний час редагування є проектом.]]></translation>
+      </item>
       <item type="message" name="FallbackInfo">
         <translation language="nl"><![CDATA[<p><strong>Niet elk blok kon automatisch worden toegewezen aan een positie.</strong></p><p>Blokken die toegevoegd werden op posities die in deze template niet beschikbaar zijn worden hier weergegeven. Standaard-blokken uit de vorige template die niet voorkomen in de huidige template worden ook hier getoond.<br />Je kan deze eenvoudig verslepen naar de gewenste positie.</p><p>Deze blokken zullen vervallen bij het opslaan van de pagina of het kiezen van een andere template.</p>]]></translation>
         <translation language="en"><![CDATA[<p><strong>Not every block could automatically be assigned to a position.</strong></p><p>Blocks that were added to positions that are not available in this template, are shown here. Default blocks from the previous template that are not present in the current template are also displayed here.<br />You can easily drag them to the desired position.</p><p>These blocks will disappear after saving the page or selecting another template.</p>]]></translation>
