@@ -196,6 +196,9 @@ jsBackend.pages.extras =
 
 		// reset indexes (sequence)
 		jsBackend.pages.extras.resetIndexes();
+
+		// save page
+		jsBackend.pages.extras.savePage(index);
 	},
 
 	// edit content
@@ -242,7 +245,7 @@ jsBackend.pages.extras =
 						$(this).dialog('close');
 
 						// save page
-						jsBackend.pages.extras.savePage();
+						jsBackend.pages.extras.savePage(index);
 					}
 				},
 				{
@@ -325,7 +328,7 @@ jsBackend.pages.extras =
 						$(this).insertBefore(blockPlaceholder);
 
 						// save page
-						jsBackend.pages.extras.savePage();
+						jsBackend.pages.extras.savePage(index);
 					}
 				},
 				{
@@ -516,14 +519,21 @@ jsBackend.pages.extras =
 	},
 
 	// show a message and save the page
-	savePage: function()
+	savePage: function(index)
 	{
 		// show message
 		jsBackend.messages.add('warning', jsBackend.locale.msg('PageIsBeingSaved'));
 
+		// init vars
+		$form = $('form');
+		var boxId = $('div[data-block-id=' + index + ']').parents('td.box').attr('id');
+
+		// add anchor to form action
+		$form.attr('action', $form.attr('action') + '#' + boxId);
+
 		// save page (as draft if we're adding a page)
 		if($('#formAdd').length > 0 || $('#draft').length > 0) $('#saveAsDraft').click();
-		else $('form').submit();
+		else $form.submit();
 	},
 
 	// add a block
@@ -582,7 +592,7 @@ jsBackend.pages.extras =
 							}
 
 							// save the page if a module block was added
-							else jsBackend.pages.extras.savePage();
+							else jsBackend.pages.extras.savePage(index);
 						}
 					},
 					{
@@ -680,6 +690,9 @@ jsBackend.pages.extras =
 
 				// reorder blocks = template is no longer original
 				jsBackend.pages.template.original = false;
+
+				// save page
+				jsBackend.pages.extras.savePage(ui.item.attr('data-block-id'));
 			},
 			start: function(e, ui)
 			{
