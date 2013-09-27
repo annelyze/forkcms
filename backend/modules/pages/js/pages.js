@@ -742,6 +742,9 @@ jsBackend.pages.extras =
 			$(this).addClass('iconInvisible');
 			$(this).parent().parent().addClass('templateDisabled');
 		}
+
+		// save page
+		jsBackend.pages.extras.savePage(index);
 	},
 
 	// display an effect on updated items
