@@ -1344,6 +1344,7 @@ class BackendPagesModel
 		// init labels (for readability below)
 		$labelAddNow = SpoonFilter::ucfirst(BL::lbl('ExtraAddNow'));
 		$labelModuleContent = SpoonFilter::ucfirst(BL::lbl('ExtraModuleContent'));
+		$labelFullModules = SpoonFilter::ucfirst(BL::lbl('ExtraFullModules'));
 
 		// init types with user generated types
 		$types = array(
@@ -1354,14 +1355,17 @@ class BackendPagesModel
 			$labelModuleContent => array()
 		);
 
+		// can we add a block extra?
+		if($incluceBlockExtras) $types['add_module'] = $labelFullModules;
+
 		// get the extra's grouped by module
 		$extrasData = BackendExtensionsModel::getExtrasData();
 
 		// loop the modules to add to the types array
 		foreach($extrasData as $module => $data)
 		{
-			// ignore modules that only have block extras if needed
-			if(!$incluceBlockExtras && !isset($data['items']['widget'])) continue;
+			// ignore modules that don't have widgets
+			if(!isset($data['items']['widget'])) continue;
 
 			$types[$labelModuleContent][$module] = $data['name'];
 		}

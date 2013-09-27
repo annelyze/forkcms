@@ -36,11 +36,11 @@ class BackendPagesEdit extends BackendBaseActionEdit
 	private $dgDrafts;
 
 	/**
-	 * The extras
+	 * The extras and extras data
 	 *
 	 * @var	array
 	 */
-	private $extras = array();
+	private $extras = array(), $extrasData = array();
 
 	/**
 	 * Is the current user a god user?
@@ -95,8 +95,9 @@ class BackendPagesEdit extends BackendBaseActionEdit
 			foreach($this->templates as &$row) $row['disabled'] = ($row['has_block']);
 		}
 
-		// get the extras
+		// get the extras and extras data
 		$this->extras = BackendExtensionsModel::getExtras();
+		$this->extrasData = BackendExtensionsModel::getExtrasData();
 
 		$this->loadForm();
 		$this->loadDrafts();
@@ -330,6 +331,9 @@ class BackendPagesEdit extends BackendBaseActionEdit
 			}
 		}
 
+		// init vars
+		$includeBlockExtras = true;
+
 		// build blocks array
 		foreach($this->blocksContent as $i => $block)
 		{
@@ -340,6 +344,9 @@ class BackendPagesEdit extends BackendBaseActionEdit
 			$block['formElements']['hidPosition'] = $this->frm->addHidden('block_position_' . $block['index'], $block['position']);
 			$block['formElements']['txtHTML'] = $this->frm->addTextArea('block_html_' . $block['index'], $block['html']); // this is no editor; we'll add the editor in JS
 			$block['formElements']['hidImage'] = $this->frm->addHidden('block_image_' . $block['index'], $block['image']);
+
+			// this page had a block so the block extra shouldn't be included in the extra type dropdown
+			if($block['type'] === 'extra' && isset($this->extras[$block['extra_id']]['type']) && $this->extras[$block['extra_id']]['type'] == 'block') $includeBlockExtras = false;
 
 			$this->positions[$block['position']]['blocks'][] = $block;
 		}
@@ -368,8 +375,27 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		$isAction = (isset($this->record['data']['is_action']) && $this->record['data']['is_action'] == true) ? true : false;
 		$this->frm->addCheckbox('is_action', $isAction);
 
-		// extra
-		$this->frm->addDropdown('extra_type', BackendPagesModel::getTypesForDropdown());
+		// get block extras
+		$blockExtras = array();
+		foreach($this->extras as $id => $extra)
+		{
+			// only blocks
+			if($extra['type'] != 'block') continue;
+
+			// get module and action name
+			$moduleName = SpoonFilter::ucfirst(BL::lbl(SpoonFilter::toCamelCase($extra['module'])));
+			$actionName = SpoonFilter::ucfirst(BL::lbl($extra['label']));
+
+			// add module action
+			$blockExtras[$id] = $moduleName . ($moduleName == $actionName ? '' : ': ' . $actionName);
+
+			// sort on value
+			asort($blockExtras);
+		}
+
+		// extra type and block extras
+		$this->frm->addDropdown('extra_type', BackendPagesModel::getTypesForDropdown($includeBlockExtras));
+		$this->frm->addDropdown('extra_block_extra_id', $blockExtras);
 
 		// meta
 		$this->meta = new BackendMeta($this->frm, $this->record['meta_id'], 'title', true);
@@ -426,8 +452,8 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		$this->tpl->assign('isGod', $this->isGod);
 		$this->tpl->assign('templates', $this->templates);
 		$this->tpl->assign('positions', $this->positions);
-		$this->tpl->assign('extrasData', json_encode(BackendExtensionsModel::getExtrasData()));
-		$this->tpl->assign('extrasById', json_encode(BackendExtensionsModel::getExtras()));
+		$this->tpl->assign('extrasData', json_encode($this->extrasData));
+		$this->tpl->assign('extrasById', json_encode($this->extras));
 		$this->tpl->assign('prefixURL', rtrim(BackendPagesModel::getFullURL($this->record['parent_id']), '/'));
 		$this->tpl->assign('formErrors', (string) $this->frm->getErrors());
 

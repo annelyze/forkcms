@@ -349,22 +349,25 @@
 	<div id="addBlock" class="forkForms" title="{$lblChooseContent|ucfirst}" style="display: none;">
 		<input type="hidden" id="extraForBlock" name="extraForBlock" value="" />
 		<div class="options horizontal">
+			<p id="extraWarningAlreadyBlock">
+				<span class="infoMessage">{$msgModuleBlockAlreadyLinked}</span>
+			</p>
+			<p id="extraWarningHomeNoBlock">
+				<span class="infoMessage">{$msgHomeNoBlock}</span>
+			</p>
 			<p>{$msgWhichType}</p>
 			<p>
 				{$ddmExtraType}
 			</p>
 			<div id="extraExtraIdHolder" style="display: none;">
 				<p>{$msgWhichExtra}</p>
-				<p id="extraWarningAlreadyBlock">
-					<span class="infoMessage">{$msgModuleBlockAlreadyLinked}</span>
-				</p>
-				<p id="extraWarningHomeNoBlock">
-					<span class="infoMessage">{$msgHomeNoBlock}</span>
-				</p>
-				<p>
-					<select id="extraExtraId">
+				<p id="extraWidgetExtraIdHolder" style="display: none;">
+					<select id="extraWidgetExtraId">
 						<option value="-1">-</option>
 					</select>
+				</p>
+				<p id="extraBlockExtraIdHolder" style="display: none;">
+					{$ddmExtraBlockExtraId}
 				</p>
 			</div>
 		</div>

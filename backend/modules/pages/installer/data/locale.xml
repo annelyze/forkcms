@@ -84,18 +84,33 @@
         <translation language="uk"><![CDATA[внести зараз]]></translation>
         <translation language="lt"><![CDATA[pridėti dabar]]></translation>
       </item>
+      <item type="label" name="ExtraFullModules">
+        <translation language="nl"><![CDATA[volledige module pagina]]></translation>
+        <translation language="en"><![CDATA[full module page]]></translation>
+        <translation language="it"><![CDATA[pagina del modulo completo]]></translation>
+        <translation language="ru"><![CDATA[полная страница модуля]]></translation>
+        <translation language="zh"><![CDATA[全模塊頁面]]></translation>
+        <translation language="de"><![CDATA[Vollmodul Seite]]></translation>
+        <translation language="fr"><![CDATA[page module complet]]></translation>
+        <translation language="hu"><![CDATA[Teljes modul oldal]]></translation>
+        <translation language="es"><![CDATA[página completa del módulo]]></translation>
+        <translation language="uk"><![CDATA[повна сторінка модуля]]></translation>
+        <translation language="lt"><![CDATA[pilnas modulis puslapis]]></translation>
+        <translation language="el"><![CDATA[πλήρη σελίδα ενότητας]]></translation>
+      </item>
       <item type="label" name="ExtraModuleContent">
-        <translation language="nl"><![CDATA[uit modules]]></translation>
-        <translation language="en"><![CDATA[from modules]]></translation>
-        <translation language="it"><![CDATA[da moduli]]></translation>
-        <translation language="ru"><![CDATA[из модулей]]></translation>
-        <translation language="zh"><![CDATA[從模塊]]></translation>
-        <translation language="de"><![CDATA[aus den Modulen]]></translation>
-        <translation language="fr"><![CDATA[à partir de modules]]></translation>
-        <translation language="hu"><![CDATA[modulokból]]></translation>
-        <translation language="es"><![CDATA[a partir de módulos]]></translation>
-        <translation language="uk"><![CDATA[з модулів]]></translation>
-        <translation language="lt"><![CDATA[iš modulių]]></translation>
+        <translation language="nl"><![CDATA[inhoud uit module]]></translation>
+        <translation language="en"><![CDATA[content from module]]></translation>
+        <translation language="it"><![CDATA[contenuto dal modulo]]></translation>
+        <translation language="ru"><![CDATA[Содержание от модуля]]></translation>
+        <translation language="zh"><![CDATA[模塊內容]]></translation>
+        <translation language="de"><![CDATA[Inhalt von Modul]]></translation>
+        <translation language="fr"><![CDATA[contenu du module]]></translation>
+        <translation language="hu"><![CDATA[tartalom modul]]></translation>
+        <translation language="es"><![CDATA[contenido de módulo]]></translation>
+        <translation language="uk"><![CDATA[Зміст від модуля]]></translation>
+        <translation language="lt"><![CDATA[turinys iš modulio]]></translation>
+        <translation language="el"><![CDATA[περιεχόμενο από τη μονάδα]]></translation>
       </item>
       <item type="label" name="Fallback">
         <translation language="nl"><![CDATA[Niet-toegewezen blokken]]></translation>
