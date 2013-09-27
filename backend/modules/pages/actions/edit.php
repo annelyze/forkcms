@@ -611,6 +611,11 @@ class BackendPagesEdit extends BackendBaseActionEdit
 				// build the cache
 				BackendPagesModel::buildCache(BL::getWorkingLanguage());
 
+				// get basic redirect url and optional position box for anchor
+				$redirectUrl = BackendModel::createURLForAction('edit') . '&id=' . $page['id'] . '&var=' . urlencode($page['title']) . '&highlight=row-' . $page['id'];
+				$anchor = SpoonFilter::getGetValue('box', null, '');
+				if(!empty($anchor)) $anchor = '#' . $anchor;
+
 				// active
 				if($page['status'] == 'active')
 				{
@@ -624,14 +629,14 @@ class BackendPagesEdit extends BackendBaseActionEdit
 					BackendSearchModel::saveIndex($this->getModule(), $page['id'], array('title' => $page['title'], 'text' => $text));
 
 					// everything is saved, so redirect to the overview
-					$this->redirect(BackendModel::createURLForAction('edit') . '&id=' . $page['id'] . '&report=edited&var=' . urlencode($page['title']) . '&highlight=row-' . $page['id']);
+					$this->redirect($redirectUrl . '&report=edited' . $anchor);
 				}
 
 				// draft
 				elseif($page['status'] == 'draft')
 				{
 					// everything is saved, so redirect to the edit action
-					$this->redirect(BackendModel::createURLForAction('edit') . '&id=' . $page['id'] . '&report=saved-as-draft&var=' . urlencode($page['title']) . '&highlight=row-' . $page['id'] . '&draft=' . $page['revision_id']);
+					$this->redirect($redirectUrl . '&report=saved-as-draft&draft=' . $page['revision_id'] . $anchor);
 				}
 			}
 		}
