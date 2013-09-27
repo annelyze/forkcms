@@ -131,7 +131,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		if($revisionToLoad !== null)
 		{
 			// overwrite the current record
-			$this->record = (array) BackendPagesModel::get($this->id, $revisionToLoad);
+			$this->record = BackendPagesModel::get($this->id, $revisionToLoad);
 
 			// load blocks
 			$this->blocksContent = BackendPagesModel::getBlocks($this->id, $revisionToLoad);
@@ -147,7 +147,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		if($draftToLoad !== null)
 		{
 			// overwrite the current record
-			$this->record = (array) BackendPagesModel::get($this->id, $draftToLoad);
+			$this->record = BackendPagesModel::get($this->id, $draftToLoad);
 
 			// load blocks
 			$this->blocksContent = BackendPagesModel::getBlocks($this->id, $draftToLoad);
@@ -155,6 +155,9 @@ class BackendPagesEdit extends BackendBaseActionEdit
 			// show warning
 			$this->tpl->assign('appendRevision', true);
 		}
+
+		// check if something went wrong
+		if(empty($this->record)) $this->redirect(BackendModel::createURLForAction('index') . '&error=non-existing');
 
 		// reset some vars
 		$this->record['full_url'] = BackendPagesModel::getFullURL($this->record['id']);
