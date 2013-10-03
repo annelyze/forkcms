@@ -209,7 +209,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 		$defaultTemplateId = BackendModel::getModuleSetting('pages', 'default_template', 1);
 
 		// get the image path
-		$imagePath = FRONTEND_FILES_URL . '/pages/images/' . $this->record['id'];
+		$imagePath = FRONTEND_FILES_URL . '/pages/images/' . BL::getWorkingLanguage() . '/' . $this->record['id'];
 
 		// create form
 		$this->frm = new BackendForm('edit');
@@ -593,7 +593,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 					$blocksIndex = $imageIndex - 1;
 
 					// the image path
-					$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . $page['id'];
+					$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . BL::getWorkingLanguage() . '/' . $page['id'];
 
 					// create folders if needed
 					$fs = new Filesystem();

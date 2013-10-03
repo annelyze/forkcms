@@ -477,11 +477,19 @@ class BackendPagesModel
 				// delete meta records
 				if(!empty($metaIDs)) $db->delete('meta', 'id IN (' . implode(',', $metaIDs) . ')');
 
-				// delete blocks and their revisions
-				if(!empty($revisionIDs)) $db->delete('pages_blocks', 'revision_id IN (' . implode(',', $revisionIDs) . ')');
+				// delete revisions
+				if(!empty($revisionIDs))
+				{
+					// delete blocks
+					$db->delete('pages_blocks', 'revision_id IN (' . implode(',', $revisionIDs) . ')');
 
-				// delete page and the revisions
-				if(!empty($revisionIDs)) $db->delete('pages', 'revision_id IN (' . implode(',', $revisionIDs) . ')');
+					// delete page
+					$db->delete('pages', 'revision_id IN (' . implode(',', $revisionIDs) . ')');
+
+					// delete images
+					$fs = new Filesystem();
+					$fs->remove(FRONTEND_FILES_PATH . '/pages/images/' . $to . '/' . $id);
+				}
 			}
 		}
 
@@ -545,6 +553,13 @@ class BackendPagesModel
 			// init var
 			$blocks = array();
 			$hasBlock = ($sourceData['has_extra'] == 'Y');
+			$fs = new Filesystem();
+			$imagesPath = FRONTEND_FILES_PATH . '/pages/images';
+			$sourcePath = $imagesPath . '/' . $from . '/' . $sourceData['id'];
+			$destinationPath = $imagesPath . '/' . $to . '/' . $page['id'];
+
+			// copy the images if needed
+			if($fs->exists($sourcePath)) $fs->mirror($sourcePath, $destinationPath);
 
 			// get the blocks
 			$sourceBlocks = BackendPagesModel::getBlocks($id, null, $from);
@@ -689,7 +704,7 @@ class BackendPagesModel
 
 		// delete images
 		$fs = new Filesystem();
-		$fs->remove(FRONTEND_FILES_PATH . '/pages/images/' . $id);
+		$fs->remove(FRONTEND_FILES_PATH . '/pages/images/' . $language . '/' . $id);
 
 		// delete tags
 		BackendTagsModel::saveTags($id, '', 'pages');
@@ -1723,7 +1738,7 @@ class BackendPagesModel
 				);
 
 				// init vars
-				$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . $page['id'];
+				$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . $page['language'] . '/' . $page['id'];
 				$finder = new Finder();
 
 				// check all images for this page
