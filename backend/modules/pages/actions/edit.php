@@ -515,6 +515,12 @@ class BackendPagesEdit extends BackendBaseActionEdit
 				// image extension and mime type
 				$this->frm->getField('image')->isAllowedExtension(array('jpg', 'png', 'gif', 'jpeg'), BL::err('JPGGIFAndPNGOnly'));
 				$this->frm->getField('image')->isAllowedMimeType(array('image/jpg', 'image/png', 'image/gif', 'image/jpeg'), BL::err('JPGGIFAndPNGOnly'));
+
+				// parse index of sent image to show correct error message
+				if($this->frm->getField('image')->getErrors() != null)
+				{
+					$this->tpl->assign('imageErrorIndex', $this->frm->getField('image_index')->getValue());
+				}
 			}
 
 			// validate meta

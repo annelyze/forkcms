@@ -480,6 +480,10 @@
 
 		// fix selected state in the tree
 		var selectedId = 'page-'+ pageID;
+
+		// the index of the image block that has an error
+		var imageErrorIndex = null;
+		{option:imageErrorIndex}imageErrorIndex = {$imageErrorIndex};{/option:imageErrorIndex}
 	//]]>
 </script>
 

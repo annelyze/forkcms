@@ -901,6 +901,12 @@ jsBackend.pages.template =
 
 		// add new defaults at last
 		for(var i in newDefaults) jsBackend.pages.extras.addBlock(newDefaults[i][0], newDefaults[i][1]);
+
+		// check if a block should be opened (on image error)
+		if(imageErrorIndex !== null)
+		{
+			$('.templatePositionCurrentType[data-block-id=' + imageErrorIndex + '] .showImage').click();
+		}
 	},
 
 	// show the dialog to alter the selected template
