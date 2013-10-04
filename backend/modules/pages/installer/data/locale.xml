@@ -16,6 +16,23 @@
         <translation language="lt"><![CDATA[naujas puslapis]]></translation>
         <translation language="el"><![CDATA[Προσθήκη σελίδας]]></translation>
       </item>
+      <item type="label" name="AddItem">
+        <translation language="nl"><![CDATA[toevoegen]]></translation>
+        <translation language="en"><![CDATA[add]]></translation>
+        <translation language="hu"><![CDATA[hozzáad]]></translation>
+        <translation language="it"><![CDATA[aggiungi]]></translation>
+        <translation language="ru"><![CDATA[Добавить]]></translation>
+        <translation language="zh"><![CDATA[添加]]></translation>
+        <translation language="de"><![CDATA[hinzufügen]]></translation>
+        <translation language="fr"><![CDATA[ajouter]]></translation>
+        <translation language="es"><![CDATA[agregar]]></translation>
+        <translation language="lt"><![CDATA[naujas]]></translation>
+        <translation language="uk"><![CDATA[Додати]]></translation>
+        <translation language="sv"><![CDATA[lägg till]]></translation>
+        <translation language="el"><![CDATA[προσθήκη]]></translation>
+        <translation language="pl"><![CDATA[dodaj]]></translation>
+        <translation language="tr"><![CDATA[ekle]]></translation>
+      </item>
       <item type="label" name="ChangeTemplate">
         <translation language="nl"><![CDATA[Wijzig template]]></translation>
         <translation language="en"><![CDATA[Change template]]></translation>
@@ -139,6 +156,19 @@
         <translation language="uk"><![CDATA[Навігація підвалу сторінки]]></translation>
         <translation language="lt"><![CDATA[apačios navigacija]]></translation>
         <translation language="el"><![CDATA[Πλοήγηση στο υποσέλιδο]]></translation>
+      </item>
+      <item type="label" name="FrontendImageSize">
+        <translation language="nl"><![CDATA[formaat afbeeldingen]]></translation>
+        <translation language="en"><![CDATA[image size]]></translation>
+        <translation language="it"><![CDATA[dimensioni dell'immagine]]></translation>
+        <translation language="ru"><![CDATA[размер]]></translation>
+        <translation language="zh"><![CDATA[圖像尺寸]]></translation>
+        <translation language="de"><![CDATA[Bildgröße]]></translation>
+        <translation language="fr"><![CDATA[taille de l'image]]></translation>
+        <translation language="hu"><![CDATA[képméret]]></translation>
+        <translation language="es"><![CDATA[tamaño de la imagen]]></translation>
+        <translation language="uk"><![CDATA[розмір]]></translation>
+        <translation language="el"><![CDATA[μέγεθος εικόνας]]></translation>
       </item>
       <item type="label" name="InternalLink">
         <translation language="nl"><![CDATA[interne link]]></translation>
@@ -491,6 +521,18 @@
         <translation language="hu"><![CDATA[Használd ezt, ha a menü-elemet külső linkre akarod átirányítani.]]></translation>
         <translation language="es"><![CDATA[Ua esto si tienes que redirigir un elemento del menú al un sitio web externo.]]></translation>
         <translation language="el"><![CDATA[Χρησιμοποιήστε αυτό αν θέλετε να ανακατευθύνετε μία επιλογή του μενού σε εξωτερικό ιστοχώρο.]]></translation>
+      </item>
+      <item type="message" name="HelpImageSizes">
+        <translation language="nl"><![CDATA[Bvb.: 100x100 voor afbeeldingen beperkt in breedte en hoogte, 100x voor afbeeldingen enkel in breedte beperkt en x100 voor afbeeldingen enkel in hoogte beperkt.]]></translation>
+        <translation language="en"><![CDATA[Eg.: 100x100 for images limited in width and height, 100x for images limited in width only and x100 for images limited in height only.]]></translation>
+        <translation language="it"><![CDATA[Es.: 100x100 per immagini limitate in larghezza e altezza, 100x per immagini limitate solo in larghezza e x100 per immagini limitate solo in altezza.]]></translation>
+        <translation language="ru"><![CDATA[Пример:. 100x100 для изображений ограничено по ширине и высоте, 100x для изображений ограничены по ширине и только x100 для изображений ограничено только высоту.]]></translation>
+        <translation language="zh"><![CDATA[例如：100x100的圖片寬度和高度的限制，100倍的圖像寬和X100限制對於身高只有有限的圖像。]]></translation>
+        <translation language="de"><![CDATA[ZB: 100x100 für Bilder in Breite und Höhe begrenzt, 100x für Bilder nur in der Breite begrenzt und x100 für Bilder nur in der Höhe begrenzt.]]></translation>
+        <translation language="fr"><![CDATA[Par exemple: 100x100 pour les images limités en largeur et en hauteur, 100x pour les images limités seulement en largeur et x100 pour les images limitée seulement en hauteur.]]></translation>
+        <translation language="hu"><![CDATA[Pl.: 100x100 a képek csak a szélesség és magasság, 100x a képek csak széles, és csak x100 képekhez korlátozott magasságú csak.]]></translation>
+        <translation language="es"><![CDATA[Por ejemplo: 100x100 para imágenes limitados en anchura y altura, 100x para imágenes limitados sólo en ancho y x100 para imágenes limitados sólo en altura.]]></translation>
+        <translation language="el"><![CDATA[Π.χ.: 100x100 για εικόνες περιορίζονται σε πλάτος και ύψος, για τις εικόνες 100x περιορίζονται μόνο σε πλάτος και X100 για εικόνες περιορίζονται μόνο σε ύψος.]]></translation>
       </item>
       <item type="message" name="HelpInternalRedirect">
         <translation language="nl"><![CDATA[Hiermee kan je een item in het menu laten doorverwijzen naar een andere pagina binnen de website.]]></translation>

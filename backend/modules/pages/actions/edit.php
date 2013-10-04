@@ -602,11 +602,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 					$imagePath = FRONTEND_FILES_PATH . '/pages/images/' . BL::getWorkingLanguage() . '/' . $page['id'];
 
 					// create folders if needed
-					$fs = new Filesystem();
-					if(!$fs->exists($imagePath . '/source')) $fs->mkdir($imagePath . '/source');
-					if(!$fs->exists($imagePath . '/50x50')) $fs->mkdir($imagePath . '/50x50'); // thumbnail
-					if(!$fs->exists($imagePath . '/x200')) $fs->mkdir($imagePath . '/x200'); // for edit block pop-up
-					if(!$fs->exists($imagePath . '/900x')) $fs->mkdir($imagePath . '/900x'); // for use in the site
+					BackendPagesModel::createImageFolders($imagePath);
 
 					// delete old image if needed
 					if(!empty($this->blocksContent[$blocksIndex]['image']))
@@ -622,6 +618,7 @@ class BackendPagesEdit extends BackendBaseActionEdit
 					$counter = 1;
 
 					// add number if filename exists
+					$fs = new Filesystem();
 					while($fs->exists($imagePath . '/source/' . $this->blocksContent[$blocksIndex]['image']))
 					{
 						$this->blocksContent[$blocksIndex]['image'] = $imageName . $counter++ . '.' . $imageExtension;

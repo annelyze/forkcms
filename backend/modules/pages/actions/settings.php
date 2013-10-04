@@ -16,6 +16,13 @@
 class BackendPagesSettings extends BackendBaseActionEdit
 {
 	/**
+	 * Is the user a god user?
+	 *
+	 * @var bool
+	 */
+	protected $isGod = false;
+
+	/**
 	 * Execute the action
 	 */
 	public function execute()
@@ -32,11 +39,27 @@ class BackendPagesSettings extends BackendBaseActionEdit
 	 */
 	private function loadForm()
 	{
+		$this->isGod = BackendAuthentication::getUser()->isGod();
+
 		// init settings form
 		$this->frm = new BackendForm('settings');
 
 		// add fields for meta navigation
 		$this->frm->addCheckbox('meta_navigation', BackendModel::getModuleSetting($this->getModule(), 'meta_navigation', false));
+
+		// god user?
+		if($this->isGod) $this->frm->addText('frontend_image_size', BackendModel::getModuleSetting($this->getModule(), 'frontend_image_size', null));
+	}
+
+	/**
+	 * Parse the form
+	 */
+	protected function parse()
+	{
+		parent::parse();
+
+		// parse additional variables
+		$this->tpl->assign('isGod', $this->isGod);
 	}
 
 	/**
@@ -52,6 +75,9 @@ class BackendPagesSettings extends BackendBaseActionEdit
 			{
 				// set our settings
 				BackendModel::setModuleSetting($this->getModule(), 'meta_navigation', (bool) $this->frm->getField('meta_navigation')->getValue());
+				if($this->isGod) BackendModel::setModuleSetting($this->getModule(), 'frontend_image_size', ($this->frm->getField('frontend_image_size')->isFilled()) ? $this->frm->getField('frontend_image_size')->getValue() : null);
+
+				// @todo resize images when image size is changed?
 
 				// trigger event
 				BackendModel::triggerEvent($this->getModule(), 'after_saved_settings');

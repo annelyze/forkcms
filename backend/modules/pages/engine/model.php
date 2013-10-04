@@ -654,6 +654,23 @@ class BackendPagesModel
 	}
 
 	/**
+	 * Creates the needed image folders in a certain (page) path.
+	 */
+	public static function createImageFolders($path)
+	{
+		$fs = new Filesystem();
+
+		// get frontend image size
+		$imageSize = BackendModel::getModuleSetting('pages', 'frontend_image_size', '');
+
+		// create folders if needed
+		if(!$fs->exists($path . '/source')) $fs->mkdir($path . '/source');
+		if(!$fs->exists($path . '/50x50')) $fs->mkdir($path . '/50x50'); // thumbnail
+		if(!$fs->exists($path . '/x200')) $fs->mkdir($path . '/x200'); // for edit block pop-up
+		if(!$fs->exists($path . '/' . $imageSize)) $fs->mkdir($path . '/' . $imageSize); // for frontend
+	}
+
+	/**
 	 * Delete a page
 	 *
 	 * @param int $id The id of the page to delete.

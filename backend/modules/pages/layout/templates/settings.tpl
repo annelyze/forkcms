@@ -18,6 +18,21 @@
 		</div>
 	</div>
 
+	{option:isGod}
+		<div class="box">
+			<div class="heading">
+				<h3>{$lblImages|ucfirst}</h3>
+			</div>
+			<div class="options">
+				<p>
+					<label for="frontendImageSize">{$lblFrontendImageSize|ucfirst}</label>
+					{$txtFrontendImageSize} {$txtFrontendImageSizeError}
+					<span class="helpTxt">{$msgHelpImageSizes}</span>
+				</p>
+			</div>
+		</div>
+	{/option:isGod}
+
 	<div class="fullwidthOptions">
 		<div class="buttonHolderRight">
 			<input id="save" class="inputButton button mainButton" type="submit" name="save" value="{$lblSave|ucfirst}" />

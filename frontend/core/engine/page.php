@@ -407,6 +407,9 @@ class FrontendPage extends FrontendBaseObject
 		// set template path
 		$this->templatePath = FRONTEND_PATH . '/' . $this->record['template_path'];
 
+		// get image size setting
+		$imageSize = FrontendModel::getModuleSetting('pages', 'frontend_image_size', '');
+
 		// loop blocks
 		foreach($this->record['positions'] as $position => &$blocks)
 		{
@@ -441,11 +444,11 @@ class FrontendPage extends FrontendBaseObject
 				}
 
 				// the block only contains an image
-				elseif($block['type'] == 'image')
+				elseif($block['type'] == 'image' && !empty($imageSize))
 				{
 					// build block content for image
 					$blockContent = '<div class="pageBlockImage">';
-					$blockContent .= '<img src="' . FRONTEND_FILES_URL . '/pages/images/' . $this->record['id'] . '/900x/' . $block['image'] . '" alt="" />';
+					$blockContent .= '<img src="' . FRONTEND_FILES_URL . '/pages/images/' . FRONTEND_LANGUAGE . '/' . $this->record['id'] . '/' . $imageSize . '/' . $block['image'] . '" alt="" />';
 					$blockContent .= '</div>';
 
 					$block = array(
