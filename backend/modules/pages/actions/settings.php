@@ -70,14 +70,21 @@ class BackendPagesSettings extends BackendBaseActionEdit
 		// form is submitted
 		if($this->frm->isSubmitted())
 		{
+			// get new image size
+			$newImageSize = ($this->frm->getField('frontend_image_size')->isFilled() ? $this->frm->getField('frontend_image_size')->getValue() : null);
+
+			// validate image size format
+			if($this->isGod && !empty($newImageSize) && (int) preg_match('/^([0-9]+x[0-9]*|[0-9]*x[0-9]+)$/', $newImageSize) <= 0)
+			{
+				$this->frm->getField('frontend_image_size')->addError(BL::err('InvalidImageSize'));
+			}
+
 			// form is validated
 			if($this->frm->isCorrect())
 			{
 				// set our settings
 				BackendModel::setModuleSetting($this->getModule(), 'meta_navigation', (bool) $this->frm->getField('meta_navigation')->getValue());
-				if($this->isGod) BackendModel::setModuleSetting($this->getModule(), 'frontend_image_size', ($this->frm->getField('frontend_image_size')->isFilled()) ? $this->frm->getField('frontend_image_size')->getValue() : null);
-
-				// @todo resize images when image size is changed?
+				if($this->isGod) BackendModel::setModuleSetting($this->getModule(), 'frontend_image_size', $newImageSize);
 
 				// trigger event
 				BackendModel::triggerEvent($this->getModule(), 'after_saved_settings');

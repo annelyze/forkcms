@@ -776,6 +776,18 @@
         <translation language="es"><![CDATA[No puedes vincular un módulo a la página principal.]]></translation>
         <translation language="el"><![CDATA[Δεν επιτρέπεται να συνδέσετε μία ενότητα με την Αρχική Σελίδα.]]></translation>
       </item>
+      <item type="error" name="InvalidImageSize">
+        <translation language="nl"><![CDATA[Dit is geen geldige beeldformaat. Gebruik het formaat 100x100, 100x of x100.]]></translation>
+        <translation language="en"><![CDATA[This is not a valid image size. Use the format 100x100, 100x or x100.]]></translation>
+        <translation language="it"><![CDATA[Questa non è una dimensione dell'immagine valido. Utilizzare il formato 100x100, 100x e 100x.]]></translation>
+        <translation language="ru"><![CDATA[Это не действительный размер изображения. Используйте формат 100x100, 100x или X100.]]></translation>
+        <translation language="zh"><![CDATA[這不是一個有效的圖像尺寸。使用格式為100×100，100X或X100。]]></translation>
+        <translation language="de"><![CDATA[Dies ist keine gültige Bildgröße. Verwenden Sie das Format 100x100, 100x oder x100.]]></translation>
+        <translation language="fr"><![CDATA[Ce n'est pas une taille d'image valide. Utilisez le format 100x100, 100x ou 100x.]]></translation>
+        <translation language="hu"><![CDATA[Ez nem érvényes képméretet. A formátum 100x100, 100x vagy x100.]]></translation>
+        <translation language="es"><![CDATA[Esto no es un tamaño de la imagen válida. Utilice el formato 100x100, 100x o 100x.]]></translation>
+        <translation language="el"><![CDATA[Αυτό δεν είναι ένα έγκυρο μέγεθος της εικόνας. Χρησιμοποιήστε τη μορφή 100x100, 100x ή x100.]]></translation>
+      </item>
     </pages>
   </backend>
   <frontend>
