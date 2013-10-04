@@ -560,8 +560,11 @@ jsBackend.pages.extras =
 
 							// fetch the selected extra type
 							var selectedExtraId = 0;
-							if(selectedType == 'add_module') selectedExtraId = $('#extraBlockExtraId').val();
-							else selectedExtraId = $('#extraWidgetExtraId').val();
+							if(selectedType != 'add_now_html' && selectedType != 'add_now_image')
+							{
+								if(selectedType == 'add_module') selectedExtraId = $('#extraBlockExtraId').val();
+								else selectedExtraId = $('#extraWidgetExtraId').val();
+							}
 
 							// add the extra
 							var index = jsBackend.pages.extras.addBlock(selectedType, selectedExtraId, position);
