@@ -654,8 +654,12 @@ class BackendPagesEdit extends BackendBaseActionEdit
 					// add to search index
 					BackendSearchModel::saveIndex($this->getModule(), $page['id'], array('title' => $page['title'], 'text' => $text));
 
+					// should we show the report?
+					if(SpoonFilter::getGetValue('auto-save', null, '') == 'true') $report = '';
+					else $report = '&report=edited';
+
 					// everything is saved, so redirect to the overview
-					$this->redirect($redirectUrl . '&report=edited' . $anchor);
+					$this->redirect($redirectUrl . $report . $anchor);
 				}
 
 				// draft

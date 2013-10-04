@@ -495,8 +495,8 @@ jsBackend.pages.extras =
 		$form = $('form');
 		var boxId = $('div[data-block-id=' + index + ']').parents('td.box').attr('id');
 
-		// add position info to form action
-		$form.attr('action', $form.attr('action') + '&box=' + boxId);
+		// add position info to form action and specify this is an auto save (to prevent message from showing)
+		$form.attr('action', $form.attr('action') + '&box=' + boxId + '&auto-save=true');
 
 		// save page (as draft if we're adding a page)
 		if($('#pageStatus').length > 0 && $('#pageStatus').val() == 'draft') $('#saveAsDraft').click();
