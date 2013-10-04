@@ -9,7 +9,7 @@
 		<h2>{$lblPages|ucfirst}: {$lblEdit}</h2>
 		<div class="buttonHolderRight">
 			{option:showPagesAdd}
-			<a href="{$var|geturl:'add'}" class="button icon iconAdd">
+			<a href="{$var|geturl:'add'}&amp;parent_id={$item.parent_id}" class="button icon iconAdd">
 				<span>{$lblAdd|ucfirst}</span>
 			</a>
 			{/option:showPagesAdd}

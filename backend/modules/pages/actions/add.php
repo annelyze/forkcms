@@ -97,9 +97,18 @@ class BackendPagesAdd extends BackendBaseActionAdd
 			if($this->frm->isCorrect())
 			{
 				// init var
-				$parentId = 0;
+				$parentId = SpoonFilter::getGetValue('parent_id', null, 0, 'int');
+				$type = 'root';
 				$data = null;
 				$defaultTemplateId = BackendModel::getModuleSetting('pages', 'default_template', false);
+
+				// get type
+				if($parentId > 0)
+				{
+					$parentPage = BackendPagesModel::get($parentId);
+					if(empty($parentPage)) $parentId = 0;
+					else $type = $parentPage['type'];
+				}
 
 				// is no default template is found, just get the first template
 				if($defaultTemplateId === false)
@@ -115,7 +124,7 @@ class BackendPagesAdd extends BackendBaseActionAdd
 				$page['template_id'] = (int) $defaultTemplateId;
 				$page['meta_id'] = (int) $this->meta->save();
 				$page['language'] = BackendLanguage::getWorkingLanguage();
-				$page['type'] = 'root';
+				$page['type'] = $type;
 				$page['title'] = $this->frm->getField('title')->getValue();
 				$page['navigation_title'] = $this->frm->getField('title')->getValue();
 				$page['navigation_title_overwrite'] = 'N';
