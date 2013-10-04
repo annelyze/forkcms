@@ -1699,6 +1699,60 @@ class BackendPagesModel
 	}
 
 	/**
+	 * Resizes all pages images.
+	 *
+	 * @param string $oldImageSize The old folder for frontend images.
+	 * @param string $newImageSize The new folder for frontend images.
+	 */
+	public static function resizeImages($oldImageSize, $newImageSize)
+	{
+		// init vars
+		$finder = new Finder();
+		$fs = new Filesystem();
+		$imagePath = FRONTEND_FILES_PATH . '/pages/images';
+
+		// get width and height
+		$chunks = explode('x', $newImageSize, 2);
+		$width = ($chunks[0] != '') ? (int) $chunks[0] : null;
+		$height = ($chunks[1] != '') ? (int) $chunks[1] : null;
+
+		// loop languages
+		foreach(BL::getWorkingLanguages() as $language => $label)
+		{
+			// this folder does not exist
+			if(!$fs->exists($imagePath . '/' . $language)) continue;
+
+			// loop pages
+			foreach($finder->directories()->in($imagePath . '/' . $language)->depth('== 0') as $directory)
+			{
+				// get path
+				$pageImagePath = $directory->getPathname();
+
+				// delete old image size folder
+				$fs->remove($pageImagePath . '/' . $oldImageSize);
+
+				// create new folder
+				$fs->mkdir($pageImagePath . '/' . $newImageSize);
+
+				// create new images
+				foreach($finder->files()->in($pageImagePath . '/source') as $sourceImage)
+				{
+					// generate the thumbnail
+					$thumbnail = new SpoonThumbnail($sourceImage->getPathname(), $width, $height);
+					$thumbnail->setAllowEnlargement(true);
+
+					// if the width & height are specified we should ignore the aspect ratio
+					if($width !== null && $height !== null) $thumbnail->setForceOriginalAspectRatio(false);
+					$thumbnail->parseToFile($pageImagePath . '/' . $newImageSize . '/' . $sourceImage->getBasename());
+
+					// clear
+					unset($thumbnail);
+				}
+			}
+		}
+	}
+
+	/**
 	 * Update a page
 	 *
 	 * @param array $page The new data for the page.

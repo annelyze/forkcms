@@ -7,6 +7,10 @@
  * file that was distributed with this source code.
  */
 
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOException;
+use Symfony\Component\Finder\Finder;
+
 /**
  * This is the settings-action, it will display a form to set general pages settings
  *
@@ -70,7 +74,8 @@ class BackendPagesSettings extends BackendBaseActionEdit
 		// form is submitted
 		if($this->frm->isSubmitted())
 		{
-			// get new image size
+			// get old and new image size
+			$oldImageSize = BackendModel::getModuleSetting($this->getModule(), 'frontend_image_size', null);
 			$newImageSize = ($this->frm->getField('frontend_image_size')->isFilled() ? $this->frm->getField('frontend_image_size')->getValue() : null);
 
 			// validate image size format
@@ -82,6 +87,12 @@ class BackendPagesSettings extends BackendBaseActionEdit
 			// form is validated
 			if($this->frm->isCorrect())
 			{
+				// resize images when image size is changed
+				if($this->isGod && !empty($oldImageSize) && $oldImageSize != $newImageSize)
+				{
+					BackendPagesModel::resizeImages($oldImageSize, $newImageSize);
+				}
+
 				// set our settings
 				BackendModel::setModuleSetting($this->getModule(), 'meta_navigation', (bool) $this->frm->getField('meta_navigation')->getValue());
 				if($this->isGod) BackendModel::setModuleSetting($this->getModule(), 'frontend_image_size', $newImageSize);

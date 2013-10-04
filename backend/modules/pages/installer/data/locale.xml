@@ -676,6 +676,18 @@
         <translation language="es"><![CDATA[<strong>Atención:</strong> Cambiar la plantilla puede hacer que el contenido existente esté en otro lugar o que ya no se muestre.]]></translation>
         <translation language="el"><![CDATA[<strong>Προσοχή:</strong> Αν αλλάξετε το πρότυπο μπορεί το υπάρχον περιεχόμενο να εμφανισθεί σε άλλη περιοχή ή και να μη φαίνεται καθόλου.]]></translation>
       </item>
+      <item type="message" name="WarningImageSizes">
+        <translation language="nl"><![CDATA[<strong>Opgelet:</strong> als deze waarde wordt aangepast worden alle afbeeldingen opnieuw opgeslaan.]]></translation>
+        <translation language="en"><![CDATA[<strong>Warning:</strong> if this value is adjusted all images will be resized again.]]></translation>
+        <translation language="it"><![CDATA[<strong>Attenzione:</strong> se si regola il valore di tutte le immagini verranno ridimensionate nuovamente.]]></translation>
+        <translation language="ru"><![CDATA[<strong>Внимание:</strong> если эта стоимость корректируется всех изображений будет изменен снова.]]></translation>
+        <translation language="zh"><![CDATA[<strong>警告：</strong>如果这个值被调整所有图像将被重新调整大小。]]></translation>
+        <translation language="de"><![CDATA[<strong>Achtung:</strong> wenn dieser Wert angepasst werden alle Bilder wieder geändert werden.]]></translation>
+        <translation language="fr"><![CDATA[<strong>Attention:</strong> si cette valeur est ajustée toutes les images seront redimensionnées à nouveau.]]></translation>
+        <translation language="hu"><![CDATA[<strong>Figyelem:</strong> Ha ezt az értéket beállítani az összes kép át lesz méretezve újra.]]></translation>
+        <translation language="es"><![CDATA[<strong>Advertencia:</strong> si este valor se ajusta todas las imágenes serán redimensionadas nuevo.]]></translation>
+        <translation language="el"><![CDATA[<strong>Προσοχή:</strong> αν η τιμή αυτή προσαρμόζεται όλες οι εικόνες θα αλλάξει και πάλι.]]></translation>
+      </item>
       <item type="message" name="WhichExtra">
         <translation language="nl"><![CDATA[Wat moet er getoond worden?]]></translation>
         <translation language="en"><![CDATA[What should it display?]]></translation>

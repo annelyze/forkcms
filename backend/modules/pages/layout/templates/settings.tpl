@@ -24,6 +24,9 @@
 				<h3>{$lblImages|ucfirst}</h3>
 			</div>
 			<div class="options">
+				<div class="longHelpTxt">
+					<span class="infoMessage">{$msgWarningImageSizes}</span>
+				</div>
 				<p>
 					<label for="frontendImageSize">{$lblFrontendImageSize|ucfirst}</label>
 					{$txtFrontendImageSize} {$txtFrontendImageSizeError}
